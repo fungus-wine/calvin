@@ -37,32 +37,84 @@
 
     <!-- System overview -->
     <section>
-      <div class="arch-diagram">
-┌─────────────────────────────────────────────┐
-│            JETSON ORIN NANO 8 GB            │
-│          (Cogitator – "the brain")          │
-│   OAK-D Pro W  ·  Vision  ·  LLM (future)  │
-│                  │ USB-C serial             │
-└──────────────────┼──────────────────────────┘
-                   │
-┌──────────────────┼──────────────────────────┐
-│         ARDUINO GIGA R1 WiFi                │
-│          (Instinctus – "the spine")         │
-│  Core M7: comms / serial bridge / sensors  │
-│  Core M4: real-time PID balance loop       │
-│           │ CAN bus 250 kbps               │
-└───────────┼────────────────────────────────┘
-            │
-    ┌───────┴───────┐
-    │               │
-┌───▼───┐       ┌───▼───┐
-│ODrive │       │ODrive │
-│  S1   │       │  S1   │
-│ Left  │       │ Right │
-└───┬───┘       └───┬───┘
-    │               │
- Motor L         Motor R
- D5312s          D5312s
+      <h2 class="text-2xl font-bold mb-6">System Overview</h2>
+      <div class="bg-gray-900/40 border border-gray-800 rounded-2xl p-6 md:p-10">
+        <div class="flex flex-col items-stretch gap-0 max-w-xl mx-auto">
+
+          <!-- COGITATOR -->
+          <div class="rounded-xl border border-emerald-500/30 bg-emerald-500/5 overflow-hidden">
+            <div class="flex items-center justify-between px-5 py-3 border-b border-emerald-500/20">
+              <span class="font-mono font-bold tracking-widest text-emerald-300 text-xs uppercase">Cogitator</span>
+              <span class="text-xs text-gray-500 font-mono">Jetson Orin Nano 8 GB</span>
+            </div>
+            <div class="px-5 py-4">
+              <p class="text-xs text-gray-500 leading-relaxed">OAK-D Pro W stereo camera &nbsp;·&nbsp; Vision inference &nbsp;·&nbsp; LLM processing <span class="text-orange-400/50">(planned)</span> &nbsp;·&nbsp; WebSocket API gateway</p>
+            </div>
+          </div>
+
+          <!-- Connector: USB-C Serial -->
+          <div class="flex flex-col items-center py-3 gap-1">
+            <div class="w-px h-3 bg-gray-700"></div>
+            <span class="font-mono text-xs text-gray-600 border border-gray-700/50 rounded-full bg-gray-950 px-3 py-0.5">USB-C Serial (UART)</span>
+            <div class="w-px h-3 bg-gray-700"></div>
+            <span class="text-gray-600 leading-none text-sm">▾</span>
+          </div>
+
+          <!-- INSTINCTUS -->
+          <div class="rounded-xl border border-orange-500/30 bg-orange-500/5 overflow-hidden">
+            <div class="flex items-center justify-between px-5 py-3 border-b border-orange-500/20">
+              <span class="font-mono font-bold tracking-widest text-orange-300 text-xs uppercase">Instinctus</span>
+              <span class="text-xs text-gray-500 font-mono">Arduino GIGA R1 WiFi</span>
+            </div>
+            <div class="grid grid-cols-2 divide-x divide-orange-500/10">
+              <div class="px-5 py-4">
+                <div class="text-orange-400/50 font-mono text-xs mb-1.5">M7 core · 480 MHz</div>
+                <p class="text-xs text-gray-500 leading-relaxed">IMU &amp; ToF reads &nbsp;·&nbsp; Serial bridge &nbsp;·&nbsp; Event publisher</p>
+              </div>
+              <div class="px-5 py-4">
+                <div class="text-orange-400/50 font-mono text-xs mb-1.5">M4 core · 240 MHz</div>
+                <p class="text-xs text-gray-500 leading-relaxed">PID balance loop &nbsp;·&nbsp; ODrive CAN commands</p>
+              </div>
+            </div>
+            <div class="border-t border-orange-500/10 px-5 py-3 flex items-center gap-2">
+              <span class="text-orange-400/40 text-xs font-mono">ICM-20948 IMU &nbsp;·&nbsp; VL53L4CX × 2 ToF</span>
+              <p class="text-xs text-gray-600">via I²C</p>
+            </div>
+          </div>
+
+          <!-- Connector: CAN Bus -->
+          <div class="flex flex-col items-center pt-3 pb-1 gap-1">
+            <div class="w-px h-3 bg-gray-700"></div>
+            <span class="font-mono text-xs text-gray-600 border border-gray-700/50 rounded-full bg-gray-950 px-3 py-0.5">CAN Bus &nbsp;·&nbsp; 250 kbps &nbsp;×&nbsp; 2</span>
+            <div class="w-px h-3 bg-gray-700"></div>
+            <span class="text-gray-600 leading-none text-sm">▾</span>
+          </div>
+
+          <!-- ODrives -->
+          <div class="grid grid-cols-2 gap-3">
+            <div class="rounded-xl border border-gray-700/50 bg-gray-900/50 overflow-hidden">
+              <div class="px-4 py-3 text-center border-b border-gray-700/40">
+                <div class="text-gray-600 font-mono text-xs mb-0.5">ODrive S1</div>
+                <div class="text-gray-300 text-sm font-medium">Left Controller</div>
+              </div>
+              <div class="px-4 py-3 text-center">
+                <div class="text-gray-600 font-mono text-xs mb-0.5">D5312S Motor</div>
+                <div class="text-gray-400 text-xs">170 KV · direct drive</div>
+              </div>
+            </div>
+            <div class="rounded-xl border border-gray-700/50 bg-gray-900/50 overflow-hidden">
+              <div class="px-4 py-3 text-center border-b border-gray-700/40">
+                <div class="text-gray-600 font-mono text-xs mb-0.5">ODrive S1</div>
+                <div class="text-gray-300 text-sm font-medium">Right Controller</div>
+              </div>
+              <div class="px-4 py-3 text-center">
+                <div class="text-gray-600 font-mono text-xs mb-0.5">D5312S Motor</div>
+                <div class="text-gray-400 text-xs">170 KV · direct drive</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
 
