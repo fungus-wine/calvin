@@ -70,14 +70,14 @@
     <div class="max-w-5xl mx-auto px-6">
       <h2 class="text-2xl font-bold mb-5">What is Calvin?</h2>
       <p class="text-gray-400 leading-relaxed max-w-3xl mb-4">
-        Calvin is a research and hobby platform for exploring real-time balance control, edge AI,
+        Calvin is a robotics platform for exploring real-time balance control, edge AI,
         and human-robot interaction. It rides on two brushless motors driven by ODrive S1 controllers,
-        staying upright via a complementary-filter control loop running on an Arduino GIGA R1.
+        staying upright via a PID control loop running on an Arduino GIGA R1.
       </p>
       <p class="text-gray-400 leading-relaxed max-w-3xl">
         A Jetson Orin Nano rides on top as the "brain" — handling computer vision via an OAK-D Pro W
-        stereo camera, future LLM integration, and acting as a serial bridge to the lower-level firmware.
-        A custom Electron desktop app provides real-time telemetry and remote control.
+        stereo camera, LLM integration, and acting as a serial bridge to the lower-level firmware.
+        A custom Electron desktop app provides real-time telemetry and remote control over local Wifi.
       </p>
     </div>
   </section>

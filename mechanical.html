@@ -53,16 +53,13 @@
         <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
           <h3 class="font-semibold text-orange-300 mb-3">Structure</h3>
           <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            Calvin's chassis is a custom-designed frame sized to accommodate the Arduino GIGA R1,
-            ODrive S1 controllers, battery, and motor mounts in a compact vertical stack.
-            The layout keeps the center of mass as low as possible to reduce the torque demand
-            on the balance loop.
+            Calvin's chassis is a rectangular box frame built with 20x20mm aluminum extrusions. There is a fixed, solid 10mm axle attached to the bottom of the frame for the free-spinning wheels. 3D printed attachment brackets and panels comprise the non-structural parts that hold the electrical and mechanical hardware in place. The layout keeps the center of mass as high as possible to make balancing easier.
           </p>
           <ul class="text-sm text-gray-500 space-y-1.5">
             <li>Two-wheeled self-balancing form factor</li>
-            <li>Vertical electronics stack — Jetson on top, GIGA R1 mid, battery low</li>
-            <li>Motor mounts integrated into the base plate</li>
-            <li>Removable side panels for cable access</li>
+            <li>Vertical electronics stack — Jetson on bottom, GIGA R1 mid, battery high</li>
+            <li>Motor mounts integrated into the side panels</li>
+            <li>Removable front, side, top, and bottom panels</li>
           </ul>
         </div>
 
@@ -71,24 +68,16 @@
           <table class="w-full text-sm">
             <tbody class="divide-y divide-gray-800">
               <tr>
-                <td class="py-2 text-gray-500 pr-4">Form factor</td>
-                <td class="py-2 text-gray-300">Tall upright, two-wheeled</td>
+                <td class="py-2 text-gray-500 pr-4">Frame</td>
+                <td class="py-2 text-gray-300">240mm W x 190mm H x 150mm D</td>
               </tr>
               <tr>
-                <td class="py-2 text-gray-500 pr-4">Wheel base</td>
-                <td class="py-2 text-gray-300">Motor shaft to motor shaft</td>
+                <td class="py-2 text-gray-500 pr-4">Wheels</td>
+                <td class="py-2 text-gray-300">xxxmm Diameter, xxmm wide</td>
               </tr>
               <tr>
-                <td class="py-2 text-gray-500 pr-4">Center of mass</td>
-                <td class="py-2 text-gray-300">Low — battery at base</td>
-              </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">Camera mount</td>
-                <td class="py-2 text-gray-300">Top — forward-facing OAK-D Pro W</td>
-              </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">ToF mounts</td>
-                <td class="py-2 text-gray-300">Front face · two heights</td>
+                <td class="py-2 text-gray-500 pr-4">Weight</td>
+                <td class="py-2 text-gray-300">No idea. About 5-7 pounds total weight?</td>
               </tr>
             </tbody>
           </table>
@@ -100,20 +89,53 @@
       <div class="mt-6 bg-gray-900 border border-gray-800 rounded-xl p-6">
         <h3 class="font-semibold text-orange-300 mb-4">Electronics Layout</h3>
         <div class="grid md:grid-cols-3 gap-4 text-sm">
+
           <div class="border border-gray-700/50 rounded-lg p-4">
-            <div class="text-gray-500 font-mono text-xs uppercase mb-2">Top</div>
+            <div class="text-gray-500 font-mono text-xs uppercase mb-2">Instinctus</div>
+            <div class="text-gray-300 font-medium mb-1">Arduino GIGA R1 & Display Shield</div>
+            <div class="text-gray-500 text-xs">Mounted to front of frame so that the display is visible on the front of the chassis.</div>
+          </div>
+          <div class="border border-gray-700/50 rounded-lg p-4">
+            <div class="text-gray-500 font-mono text-xs uppercase mb-2">Instinctus</div>
+            <div class="text-gray-300 font-medium mb-1">ToF sensors</div>
+            <div class="text-gray-500 text-xs">Mounted low on the frame, facing forward and rear.</div>
+          </div>
+          <div class="border border-gray-700/50 rounded-lg p-4">
+            <div class="text-gray-500 font-mono text-xs uppercase mb-2">Instinctus</div>
+            <div class="text-gray-300 font-medium mb-1">Balance IMU</div>
+            <div class="text-gray-500 text-xs">Mounted just above the axle, as close to to the center of the axle as possible.</div>
+          </div>
+          
+          <div class="border border-gray-700/50 rounded-lg p-4">
+            <div class="text-gray-500 font-mono text-xs uppercase mb-2">Instinctus</div>
+            <div class="text-gray-300 font-medium mb-1">O-Drive S1 Motor Drivers</div>
+            <div class="text-gray-500 text-xs">Mounted on bracket at top of the chassis frame</div>
+          </div>
+          <div class="border border-gray-700/50 rounded-lg p-4">
+            <div class="text-gray-500 font-mono text-xs uppercase mb-2">Cogitator</div>
+            <div class="text-gray-300 font-medium mb-1">Seeed Studio ReSpeaker 4 Mic Array</div>
+            <div class="text-gray-500 text-xs">Mounted above the chassis frame, with clear view of sound.</div>
+          </div>
+          <div class="border border-gray-700/50 rounded-lg p-4">
+            <div class="text-gray-500 font-mono text-xs uppercase mb-2">Cogitator</div>
             <div class="text-gray-300 font-medium mb-1">Jetson Orin Nano</div>
-            <div class="text-gray-500 text-xs">Cogitator — AI and vision processing. OAK-D Pro W camera mounted at top face.</div>
+            <div class="text-gray-500 text-xs">Mounted low, just above axle.</div>
+          </div>
+
+          <div class="border border-gray-700/50 rounded-lg p-4">
+            <div class="text-gray-500 font-mono text-xs uppercase mb-2">Cogitator</div>
+            <div class="text-gray-300 font-medium mb-1">Visaton FR 58 Speaker & Amplifier</div>
+            <div class="text-gray-500 text-xs">Mounted above the chassis frame to raise center of gravity.</div>
           </div>
           <div class="border border-gray-700/50 rounded-lg p-4">
-            <div class="text-gray-500 font-mono text-xs uppercase mb-2">Mid</div>
-            <div class="text-gray-300 font-medium mb-1">Arduino GIGA R1 + ODrives</div>
-            <div class="text-gray-500 text-xs">Instinctus firmware board and both ODrive S1 controllers. CAN bus daisy-chained between them.</div>
+            <div class="text-gray-500 font-mono text-xs uppercase mb-2">Cogitator</div>
+            <div class="text-gray-300 font-medium mb-1">OAK-D Pro W Camera</div>
+            <div class="text-gray-500 text-xs">Mounted on vibration isolators above chassis frame.</div>
           </div>
           <div class="border border-gray-700/50 rounded-lg p-4">
-            <div class="text-gray-500 font-mono text-xs uppercase mb-2">Base</div>
-            <div class="text-gray-300 font-medium mb-1">Battery + Motor Mounts</div>
-            <div class="text-gray-500 text-xs">Battery pack kept low for stability. D5312S motors mount directly to base plate on each side.</div>
+            <div class="text-gray-500 font-mono text-xs uppercase mb-2">Cogitator</div>
+            <div class="text-gray-300 font-medium mb-1">S3s LiPo Battery</div>
+            <div class="text-gray-500 text-xs">Mounted above the chassis frame to raise center of gravity.</div>
           </div>
         </div>
       </div>
@@ -129,15 +151,13 @@
         <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
           <h3 class="font-semibold text-orange-300 mb-3">Motors</h3>
           <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            D5312S brushless outrunner motors — the same class of motor used in larger multirotor
-            drones. Running them direct-drive (no gearbox) keeps the drivetrain simple and
-            eliminates backlash, which matters for a balance control loop.
+            O-Drive D5312S brushless outrunner motors. Connected to wheels by 2GT belts with 8:1 reduction. 
           </p>
           <ul class="text-sm text-gray-500 space-y-1.5">
             <li>53 mm stator diameter</li>
             <li>~170 KV rating</li>
             <li>Peak torque ~1.5 N·m</li>
-            <li>Direct drive — no gearbox</li>
+            <li>Belt drive</li>
             <li>One per side, mirrored mount</li>
           </ul>
         </div>
@@ -145,14 +165,13 @@
         <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
           <h3 class="font-semibold text-orange-300 mb-3">Wheels</h3>
           <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            Wheels mount directly to the motor shaft hub. The wheel diameter determines the
-            linear speed-to-RPM ratio and affects the balance controller's effective gain —
-            larger diameter means more ground speed per unit of motor velocity.
+            Wheels mount directly to pulleys. The wheel assembly rotates on bearings around the fixed axle.
+            Tires are 3D printed Varioshore TPU printed at 210 C for optimal friction coefficient.
           </p>
           <ul class="text-sm text-gray-500 space-y-1.5">
-            <li>Hub-mounted to motor shaft</li>
-            <li>Pneumatic or solid rubber tread</li>
-            <li>Matched pair — identical left and right</li>
+            <li>Free rotation on solid axle</li>
+            <li>3D Printed Varioshore with grid infill for compliance</li>
+            <li>V-tread design</li>
           </ul>
         </div>
 
@@ -160,12 +179,11 @@
           <h3 class="font-semibold text-orange-300 mb-3">Motor Controllers</h3>
           <p class="text-gray-400 text-sm leading-relaxed mb-4">
             Each motor is driven by a dedicated ODrive S1 single-axis brushless controller.
-            The ODrives run field-oriented control (FOC) internally, accepting high-level
-            velocity setpoints from the GIGA R1 over CAN bus.
+            The O-Drives accept high-level velocity setpoints from the Arudino GIGA's M4 core over CAN bus.
           </p>
           <ul class="text-sm text-gray-500 space-y-1.5">
             <li>ODrive S1 × 2</li>
-            <li>FOC — smooth, efficient torque</li>
+            <li>PID tuning for smoothness and control</li>
             <li>Velocity control mode</li>
             <li>CAN bus · 250 kbps</li>
             <li>Up to 56 V / 40 A per controller</li>
@@ -176,13 +194,9 @@
 
       <!-- Drive topology callout -->
       <div class="mt-6 bg-gray-900/40 border border-gray-800 rounded-xl p-6">
-        <h3 class="font-semibold text-orange-300 mb-3">Direct-Drive Topology</h3>
+        <h3 class="font-semibold text-orange-300 mb-3">Drive System Design Note</h3>
         <p class="text-gray-400 text-sm leading-relaxed max-w-3xl">
-          Running the D5312S motors direct-drive means the wheel speed equals the motor speed with
-          no intermediate gearing. This simplifies the mechanical design and removes any backlash or
-          compliance that would degrade the balance loop's response. The trade-off is that the motor
-          must produce all required torque without mechanical advantage — the D5312S's relatively high
-          peak torque for its size makes this feasible at the wheel diameters chosen.
+          The O-Drives are overkill. Preliminary calculations predicted a peak motor torque of about 4-5 amps, which is just outside the smaller O-Drive Nano's capability, so I went with the more robust S1 drivers to be safe. 
         </p>
       </div>
     </section>
@@ -197,9 +211,7 @@
         <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
           <h3 class="font-semibold text-orange-300 mb-3">Battery</h3>
           <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            Calvin runs on a LiPo battery pack chosen to sit within the ODrive S1's voltage range
-            while delivering enough current for two motors under aggressive balance corrections.
-            The pack mounts at the base of the chassis to keep the center of mass low.
+            Calvin runs on a 3S 11.1V LiPo RC battery pack.
           </p>
           <table class="w-full text-sm">
             <tbody class="divide-y divide-gray-800">
@@ -209,16 +221,13 @@
               </tr>
               <tr>
                 <td class="py-2 text-gray-500 pr-4">Nominal voltage</td>
-                <td class="py-2 text-gray-300">6S · 22.2 V</td>
+                <td class="py-2 text-gray-300">3S · 11.1 V</td>
               </tr>
               <tr>
-                <td class="py-2 text-gray-500 pr-4">ODrive input range</td>
-                <td class="py-2 text-gray-300">8–56 V (within spec)</td>
+                <td class="py-2 text-gray-500 pr-4">Capacity</td>
+                <td class="py-2 text-gray-300">58.83 Wh (5.3 Ahr)</td>
               </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">Placement</td>
-                <td class="py-2 text-gray-300">Base of chassis — low CoM</td>
-              </tr>
+
             </tbody>
           </table>
         </div>
@@ -228,7 +237,7 @@
           <p class="text-gray-400 text-sm leading-relaxed mb-4">
             The battery feeds the ODrive S1 controllers directly at pack voltage. Lower-voltage
             rails for the Arduino GIGA R1 and Jetson Orin Nano are derived via dedicated BEC /
-            DC-DC converters to isolate logic power from the noisy motor supply.
+            DC-DC converters to isolate logic power from the noisy motor supply. 
           </p>
           <ul class="text-sm text-gray-500 space-y-2">
             <li class="flex gap-3">
