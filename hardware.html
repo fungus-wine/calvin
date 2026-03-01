@@ -53,7 +53,7 @@
           <div class="rounded-xl border border-emerald-500/30 bg-emerald-500/5 overflow-hidden">
             <div class="flex items-center justify-between px-5 py-3 border-b border-emerald-500/20">
               <span class="font-mono font-bold tracking-widest text-emerald-300 text-xs uppercase">Cogitator</span>
-              <span class="text-xs text-gray-500 font-mono">Jetson Orin Nano 8 GB</span>
+              <span class="text-xs text-gray-500 font-mono">Jetson Orin Nano Super 8 GB</span>
             </div>
             <div class="px-5 py-4">
               <p class="text-xs text-gray-500 leading-relaxed">OAK-D Pro W stereo camera &nbsp;·&nbsp; Vision inference &nbsp;·&nbsp; LLM processing <span class="text-orange-400/50">(planned)</span> &nbsp;·&nbsp; WebSocket API gateway</p>
@@ -188,17 +188,73 @@
       </div>
     </section>
 
+    <!-- GIGA Display Shield -->
+    <section>
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+        <span class="text-orange-400">02</span> Arduino GIGA Display Shield
+      </h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+          <h3 class="font-semibold text-orange-300 mb-3">Overview</h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4">
+            The Arduino GIGA Display Shield mounts directly onto the GIGA R1 via its high-density
+            connector, adding a 3.97&Prime; capacitive touchscreen to the board with no additional wiring.
+            On Calvin it serves as a local status display and on-robot control panel, showing balance
+            angle, motor telemetry, and allowing basic mode changes without the desktop app.
+          </p>
+          <ul class="text-sm text-gray-500 space-y-1">
+            <li>480 × 800 px TFT LCD, portrait orientation</li>
+            <li>5-point capacitive multi-touch</li>
+            <li>Driven by the M7 core via <code class="text-gray-400 bg-gray-800 px-1 rounded">Arduino_GigaDisplay</code> library</li>
+            <li>LVGL graphics framework for UI widgets</li>
+            <li>Onboard microphone &amp; camera connector (unused)</li>
+          </ul>
+        </div>
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+          <h3 class="font-semibold text-orange-300 mb-3">Key Specs</h3>
+          <table class="w-full text-sm">
+            <tbody class="divide-y divide-gray-800">
+              <tr>
+                <td class="py-2 text-gray-500 pr-4">Display size</td>
+                <td class="py-2 text-gray-300">3.97&Prime; TFT LCD</td>
+              </tr>
+              <tr>
+                <td class="py-2 text-gray-500 pr-4">Resolution</td>
+                <td class="py-2 text-gray-300">480 × 800 px</td>
+              </tr>
+              <tr>
+                <td class="py-2 text-gray-500 pr-4">Touch</td>
+                <td class="py-2 text-gray-300">Capacitive, 5-point multi-touch</td>
+              </tr>
+              <tr>
+                <td class="py-2 text-gray-500 pr-4">Interface</td>
+                <td class="py-2 text-gray-300">High-density GIGA connector (no wiring)</td>
+              </tr>
+              <tr>
+                <td class="py-2 text-gray-500 pr-4">Graphics lib</td>
+                <td class="py-2 text-gray-300">LVGL via Arduino_GigaDisplay_GFX</td>
+              </tr>
+              <tr>
+                <td class="py-2 text-gray-500 pr-4">Extras</td>
+                <td class="py-2 text-gray-300">PDM microphone · camera connector</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
     <!-- Sensors -->
     <section>
       <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-        <span class="text-orange-400">02</span> Sensors
+        <span class="text-orange-400">03</span> Sensors
       </h2>
       <div class="grid md:grid-cols-2 gap-6">
 
         <!-- IMU -->
         <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
           <div class="flex items-start justify-between mb-3">
-            <h3 class="font-semibold text-orange-300">ICM-20948 IMU</h3>
+            <h3 class="font-semibold text-orange-300">ICM-20948 IMU <span class="text-gray-600 font-normal text-xs">(Adafruit #4554)</span></h3>
             <span class="text-xs text-gray-600 font-mono bg-gray-800 px-2 py-1 rounded">I²C</span>
           </div>
           <p class="text-gray-400 text-sm leading-relaxed mb-4">
@@ -216,7 +272,7 @@
         <!-- ToF -->
         <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
           <div class="flex items-start justify-between mb-3">
-            <h3 class="font-semibold text-orange-300">VL53L4CX Time-of-Flight (× 2)</h3>
+            <h3 class="font-semibold text-orange-300">VL53L4CX Time-of-Flight (× 2) <span class="text-gray-600 font-normal text-xs">(Adafruit #5425)</span></h3>
             <span class="text-xs text-gray-600 font-mono bg-gray-800 px-2 py-1 rounded">I²C</span>
           </div>
           <p class="text-gray-400 text-sm leading-relaxed mb-4">
@@ -237,7 +293,7 @@
     <!-- Drive System -->
     <section>
       <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-        <span class="text-orange-400">03</span> Drive System
+        <span class="text-orange-400">04</span> Drive System
       </h2>
       <div class="grid md:grid-cols-3 gap-6">
 
@@ -290,13 +346,13 @@
     <!-- Cogitator hardware -->
     <section>
       <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-        <span class="text-orange-400">04</span> Jetson Orin Nano (Cogitator)
+        <span class="text-orange-400">05</span> Jetson Orin Nano (Cogitator)
       </h2>
       <div class="grid md:grid-cols-2 gap-6">
         <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <h3 class="font-semibold text-orange-300 mb-3">Jetson Orin Nano 8 GB</h3>
+          <h3 class="font-semibold text-orange-300 mb-3">Jetson Orin Nano Super 8 GB</h3>
           <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            NVIDIA's entry-level edge AI module. Provides 40 TOPS of AI performance in a compact
+            NVIDIA's Orin Nano Super module. Provides 67 TOPS of AI performance in a compact
             form factor — more than sufficient for vision inference, object detection, and future
             LLM tasks.
           </p>
@@ -312,7 +368,7 @@
               </tr>
               <tr>
                 <td class="py-2 text-gray-500 pr-4">AI Perf</td>
-                <td class="py-2 text-gray-300">40 TOPS</td>
+                <td class="py-2 text-gray-300">67 TOPS</td>
               </tr>
               <tr>
                 <td class="py-2 text-gray-500 pr-4">RAM</td>
@@ -324,7 +380,7 @@
               </tr>
               <tr>
                 <td class="py-2 text-gray-500 pr-4">OS</td>
-                <td class="py-2 text-gray-300">JetPack (Ubuntu 22.04 base)</td>
+                <td class="py-2 text-gray-300">JetPack 6.2 (Ubuntu 22.04 base)</td>
               </tr>
             </tbody>
           </table>
@@ -344,6 +400,54 @@
             <li>USB 3.1 Gen 1 · DepthAI Python SDK</li>
           </ul>
         </div>
+      </div>
+    </section>
+
+    <!-- Audio -->
+    <section>
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+        <span class="text-orange-400">06</span> Audio
+      </h2>
+      <div class="grid md:grid-cols-2 gap-6">
+
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+          <div class="flex items-start justify-between mb-3">
+            <h3 class="font-semibold text-orange-300">ReSpeaker 4-Mic Array</h3>
+            <span class="text-xs text-gray-600 font-mono bg-gray-800 px-2 py-1 rounded">USB</span>
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4">
+            Seeed Studio's circular 4-microphone array, designed for far-field voice capture.
+            Connects to the Jetson Orin Nano via USB and presents as a standard ALSA audio device.
+            Used for wake-word detection and voice command input.
+          </p>
+          <ul class="text-sm text-gray-500 space-y-1">
+            <li>4 × MEMS microphones in circular layout</li>
+            <li>Up to 5 m pickup range</li>
+            <li>Onboard AEC, beamforming &amp; noise suppression</li>
+            <li>12 programmable RGB LEDs (via USB HID)</li>
+            <li>USB Audio Class — no driver required on Linux</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+          <div class="flex items-start justify-between mb-3">
+            <h3 class="font-semibold text-orange-300">Visaton FR58 + MAX98357A <span class="text-gray-600 font-normal text-xs">(Adafruit #3006)</span></h3>
+            <span class="text-xs text-gray-600 font-mono bg-gray-800 px-2 py-1 rounded">I²S</span>
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4">
+            A Visaton FR58 full-range driver (8 Ω) paired with the Adafruit MAX98357A I²S amplifier
+            breakout. The amp decodes I²S directly from the Jetson, requiring no
+            separate DAC. Output is mono, sufficient for voice synthesis and audio feedback.
+          </p>
+          <ul class="text-sm text-gray-500 space-y-1">
+            <li>Speaker: Visaton FR58, 8 Ω, 2 W rated</li>
+            <li>Amp: MAX98357A · class D · up to 3.2 W @ 4 Ω</li>
+            <li>I²S input — BCLK, LRCLK, DIN from Jetson GPIO</li>
+            <li>Gain selectable via SD/MODE pin (6 / 9 / 12 / 15 dB)</li>
+            <li>No I²C address / no driver — PCM audio only</li>
+          </ul>
+        </div>
+
       </div>
     </section>
 

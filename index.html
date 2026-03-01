@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calvin – Self-Balancing Robot</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <link rel="stylesheet" href="assets/css/custom.css">
 </head>
 <body class="bg-gray-950 text-gray-100 min-h-screen">
@@ -55,15 +56,12 @@
           </a>
         </div>
       </div>
-      <!-- Hero image placeholder -->
-      <div class="flex-shrink-0 w-72 h-72 bg-gray-800 rounded-2xl border border-gray-700 flex flex-col items-center justify-center text-gray-600">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
-            d="M12 3a3 3 0 00-3 3v1H7a2 2 0 00-2 2v2a2 2 0 002 2h1v4a2 2 0 002 2h2a2 2 0 002-2v-4h1a2 2 0 002-2V9a2 2 0 00-2-2h-2V6a3 3 0 00-3-3z"/>
-        </svg>
-        <span class="text-sm">Hero image coming soon</span>
-        <span class="text-xs mt-1">Drop photo in assets/images/</span>
-      </div>
+      <!-- Hero image -->
+      <figure class="flex-shrink-0">
+        <img src="assets/images/hero-2026-03-01.webp" alt="Calvin robot"
+             class="w-72 h-72 object-cover rounded-2xl border border-gray-700">
+        <figcaption class="gallery-caption mt-2 text-center">Calvin as of March 1, 2026</figcaption>
+      </figure>
     </div>
   </header>
 
@@ -177,25 +175,25 @@
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <a href="hardware.html"
            class="bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg p-4 transition-colors text-center">
-          <div class="text-2xl mb-2">⚙️</div>
+          <i data-lucide="cpu" class="w-6 h-6 mx-auto mb-2 text-orange-400"></i>
           <div class="font-semibold text-sm">Hardware</div>
           <div class="text-xs text-gray-500 mt-1">Specs &amp; components</div>
         </a>
         <a href="software.html"
            class="bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg p-4 transition-colors text-center">
-          <div class="text-2xl mb-2">💻</div>
+          <i data-lucide="code-2" class="w-6 h-6 mx-auto mb-2 text-orange-400"></i>
           <div class="font-semibold text-sm">Software</div>
           <div class="text-xs text-gray-500 mt-1">Architecture &amp; code</div>
         </a>
         <a href="gallery.html"
            class="bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg p-4 transition-colors text-center">
-          <div class="text-2xl mb-2">📷</div>
+          <i data-lucide="camera" class="w-6 h-6 mx-auto mb-2 text-orange-400"></i>
           <div class="font-semibold text-sm">Gallery</div>
           <div class="text-xs text-gray-500 mt-1">Photos &amp; videos</div>
         </a>
         <a href="build-log.html"
            class="bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg p-4 transition-colors text-center">
-          <div class="text-2xl mb-2">📋</div>
+          <i data-lucide="scroll-text" class="w-6 h-6 mx-auto mb-2 text-orange-400"></i>
           <div class="font-semibold text-sm">Build Log</div>
           <div class="text-xs text-gray-500 mt-1">Progress updates</div>
         </a>
@@ -212,5 +210,6 @@
     </div>
   </footer>
 
+  <script>lucide.createIcons();</script>
 </body>
 </html>
