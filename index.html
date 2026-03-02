@@ -76,7 +76,7 @@
       </p>
       <p class="text-gray-400 leading-relaxed max-w-3xl">
         A Jetson Orin Nano rides on top as the "brain" — handling computer vision via an OAK-D Pro W
-        stereo camera, LLM integration, and acting as a serial bridge to the lower-level firmware.
+        stereo camera, LLM integration, and acting as a serial bridge to the lower-level firmware running on a Teensy 4.1.
         A custom Electron desktop app provides real-time telemetry and remote control over local Wifi.
       </p>
     </div>
@@ -92,14 +92,13 @@
         <div class="text-orange-400 font-mono text-xs uppercase tracking-widest mb-3">Firmware</div>
         <h3 class="text-xl font-bold mb-3">Instinctus</h3>
         <p class="text-gray-400 text-sm leading-relaxed mb-5">
-          Dual-core Arduino GIGA R1 firmware. M4 runs the real-time balance loop;
-          M7 handles comms, sensors, and higher-level commands. Drives two ODrive S1 motor controllers
+          Teensy 4.1 handles comms, sensors, and higher-level commands. Drives two ODrive S1 motor controllers
           over CAN bus.
         </p>
         <div class="text-xs text-gray-500 mb-4 space-y-1">
-          <div>Arduino GIGA R1 WiFi</div>
+          <div>Teensy 4.1 (ARM Cortex-M7 at 600MHz)</div>
           <div>ICM20948 IMU · 2× VL53L4CX ToF</div>
-          <div>CAN bus 250 kbps</div>
+          <div>CAN, I2S, I2C, SPI, USB connectivity</div>
         </div>
         <a href="https://github.com/fungus-wine/calvin_instinctus"
            target="_blank" rel="noopener"
@@ -148,23 +147,6 @@
         </a>
       </div>
 
-    </div>
-
-    <!-- InstinctusKit callout -->
-    <div class="mt-6 bg-gray-900 border border-gray-800 rounded-xl p-5 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-      <div class="flex-1">
-        <div class="text-orange-400 font-mono text-xs uppercase tracking-widest mb-1">Shared Library</div>
-        <h3 class="font-bold mb-1">InstinctusKit</h3>
-        <p class="text-gray-400 text-sm">
-          A shared Arduino library providing the inter-core event queue system used by Instinctus.
-          Lives in the <code class="text-gray-300 bg-gray-800 px-1 rounded">librarius</code> monorepo.
-        </p>
-      </div>
-      <a href="https://github.com/fungus-wine/librarius"
-         target="_blank" rel="noopener"
-         class="text-orange-400 hover:text-orange-300 text-sm font-medium transition-colors whitespace-nowrap">
-        GitHub →
-      </a>
     </div>
   </section>
 
