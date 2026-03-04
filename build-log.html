@@ -78,7 +78,7 @@
 
     function renderPost({ meta, body }) {
       const tag = meta.tag
-        ? `<span class="text-xs text-gray-600 bg-gray-900 border border-gray-800 px-2 py-0.5 rounded-full">${meta.tag}</span>`
+        ? meta.tag.split(',').map(t => `<span class="text-xs text-gray-600 bg-gray-900 border border-gray-800 px-2 py-0.5 rounded-full">${t.trim()}</span>`).join(' ')
         : '';
       function figure(src, alt) {
         return `<figure class="flex-1 min-w-0">
@@ -101,7 +101,7 @@
             ${tag}
           </div>
           ${meta.title ? `<h2 class="text-lg font-bold text-gray-100 mt-3 mb-4">${meta.title}</h2>` : ''}
-          <div class="prose-log">${marked.parse(body.trim())}</div>
+          <div class="prose prose-invert prose-orange prose-sm max-w-none">${marked.parse(body.trim())}</div>
           ${imageBlock}
         </article>`;
     }
