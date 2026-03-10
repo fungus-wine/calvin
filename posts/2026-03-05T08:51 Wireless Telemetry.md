@@ -2,7 +2,6 @@
 date: 2026-03-05T08:51
 tag: Cogitator, Explorator
 title: Wireless Telemetry
-
 ---
 
 In the last post, I got the communication between Cogitator and Explorator working, but with a couple of constraints:
