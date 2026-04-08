@@ -28,7 +28,7 @@
   <!-- AI stub warning -->
   <div class="max-w-5xl mx-auto px-6 pt-6">
     <div class="bg-gray-900/40 border border-gray-800 rounded-xl px-4 py-3 text-gray-500 text-sm text-center">
-      AI-generated stub — much of the information on this site is incorrect or placeholder.
+      This is a project planning and overview page. For progress updates, check the <a href="build-log.html"class="text-orange-400 hover:text-orange-300 transition-colors">build log</a>.
     </div>
   </div>
 
@@ -37,8 +37,7 @@
     <p class="text-orange-400 text-sm font-semibold tracking-widest uppercase mb-2">Documentation</p>
     <h1 class="text-4xl font-bold mb-4">Software Architecture</h1>
     <p class="text-gray-400 text-lg max-w-2xl">
-      Calvin's software is split across three purpose-built systems that communicate in a
-      strict hierarchy: Explorator → Cogitator → Instinctus.
+      Calvin's software is split across three purpose-built systems that communicate in a chain: Explorator ↔ Cogitator ↔ Instinctus.
     </p>
   </header>
 
@@ -57,7 +56,7 @@
               <span class="text-xs text-gray-500 font-mono">Electron + Vue 3</span>
             </div>
             <div class="px-5 py-4">
-              <p class="text-xs text-gray-500 leading-relaxed">Human workstation &nbsp;·&nbsp; Telemetry display &nbsp;·&nbsp; Camera feeds &nbsp;·&nbsp; Manual controls &nbsp;·&nbsp; PID tuning</p>
+              <p class="text-xs text-gray-500 leading-relaxed">Human workstation &nbsp;·&nbsp; Telemetry display &nbsp;·&nbsp; Audio & video feeds &nbsp;·&nbsp; Manual controls &nbsp;·&nbsp; PID tuning</p>
             </div>
           </div>
 
@@ -76,14 +75,14 @@
               <span class="text-xs text-gray-500 font-mono">Python &nbsp;·&nbsp; Jetson Orin Nano</span>
             </div>
             <div class="px-5 py-4">
-              <p class="text-xs text-gray-500 leading-relaxed">Vision service (OAK-D) &nbsp;·&nbsp; LLM processing <span class="text-orange-400/50">(planned)</span> &nbsp;·&nbsp; Telemetry relay &nbsp;·&nbsp; WebSocket API gateway</p>
+              <p class="text-xs text-gray-500 leading-relaxed">Vision service (OAK-D Pro W) &nbsp;·&nbsp; LLM processing <span class="text-orange-400/50">(planned)</span> &nbsp;·&nbsp; Telemetry relay &nbsp;·&nbsp; WebSocket gateway</p>
             </div>
           </div>
 
-          <!-- Connector: UART -->
+          <!-- Connector: Serial -->
           <div class="flex flex-col items-center py-3 gap-1">
             <div class="w-px h-3 bg-gray-700"></div>
-            <span class="font-mono text-xs text-gray-600 border border-gray-700/50 rounded-full bg-gray-950 px-3 py-0.5">USB-C Serial (UART)</span>
+            <span class="font-mono text-xs text-gray-600 border border-gray-700/50 rounded-full bg-gray-950 px-3 py-0.5">1 MBPS Serial</span>
             <div class="w-px h-3 bg-gray-700"></div>
             <span class="text-gray-600 leading-none text-sm">▾</span>
           </div>
@@ -103,7 +102,7 @@
           <!-- Connector: CAN bus branch to ODrives -->
           <div class="flex flex-col items-center pt-3 pb-1 gap-1">
             <div class="w-px h-3 bg-gray-700"></div>
-            <span class="font-mono text-xs text-gray-600 border border-gray-700/50 rounded-full bg-gray-950 px-3 py-0.5">CAN Bus &nbsp;×&nbsp; 2</span>
+            <span class="font-mono text-xs text-gray-600 border border-gray-700/50 rounded-full bg-gray-950 px-3 py-0.5">CAN Bus</span>
             <div class="w-px h-3 bg-gray-700"></div>
             <span class="text-gray-600 leading-none text-sm">▾</span>
           </div>
@@ -144,10 +143,10 @@
             motor commands.
           </p>
           <ul class="text-sm text-gray-500 space-y-1.5">
-            <li>Reads ICM-20948 IMU via I²C</li>
-            <li>Polls VL53L4CX ToF sensors</li>
-            <li>Receives commands from Cogitator over UART</li>
-            <li>Runs PID controller (~1 kHz target loop rate)</li>
+            <li>Reads ICM-20948 IMU via SPI</li>
+            <li>Reads VL53L4CX ToF sensors on a I2C bus</li>
+            <li>Receives commands from Cogitator over serial</li>
+            <li>Runs PID controller (1 kHz target loop rate)</li>
             <li>Sends velocity setpoints to ODrive S1 over CAN</li>
             <li>Forwards telemetry back to Cogitator</li>
           </ul>
@@ -159,10 +158,6 @@
               <tr>
                 <td class="py-2 text-gray-500 pr-4">Board</td>
                 <td class="py-2 text-gray-300">Teensy 4.1</td>
-              </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">SoC</td>
-                <td class="py-2 text-gray-300">NXP i.MX RT1062</td>
               </tr>
               <tr>
                 <td class="py-2 text-gray-500 pr-4">Core</td>
@@ -178,38 +173,11 @@
               </tr>
               <tr>
                 <td class="py-2 text-gray-500 pr-4">Loop rate</td>
-                <td class="py-2 text-gray-300">~1 kHz target</td>
+                <td class="py-2 text-gray-300">1 kHz target</td>
               </tr>
             </tbody>
           </table>
         </div>
-      </div>
-    </section>
-
-    <!-- InstinctusKit -->
-    <section>
-      <h2 class="text-2xl font-bold mb-2 flex items-center gap-3">
-        <span class="text-orange-400">02</span> InstinctusKit
-      </h2>
-      <p class="text-gray-500 text-sm mb-6">
-        <a href="https://github.com/fungus-wine/librarius" target="_blank" rel="noopener"
-           class="text-orange-400 hover:text-orange-300 transition-colors">
-          github.com/fungus-wine/librarius
-        </a>
-        &nbsp;·&nbsp; Shared Arduino library in the <code class="text-gray-400">librarius</code> monorepo
-      </p>
-      <div class="bg-gray-900 border border-gray-800 rounded-xl p-6 max-w-2xl">
-        <p class="text-gray-400 text-sm leading-relaxed mb-4">
-          InstinctusKit is the shared Arduino library used by the Instinctus firmware. It provides
-          reusable abstractions for sensor drivers, serial protocol handling, and CAN bus communication
-          with the ODrive controllers.
-        </p>
-        <ul class="text-sm text-gray-500 space-y-1.5">
-          <li>Typed event structs (sensor data, commands, telemetry)</li>
-          <li>Serial protocol framing for Cogitator link</li>
-          <li>Header-only Arduino library for easy inclusion</li>
-          <li>Versioned alongside Instinctus in the <code class="text-gray-400">librarius</code> monorepo</li>
-        </ul>
       </div>
     </section>
 
@@ -229,23 +197,31 @@
           <h3 class="font-semibold text-orange-300 mb-3">Planned Python Services</h3>
           <p class="text-gray-400 text-sm leading-relaxed mb-4">
             Cogitator is architected as a set of independent Python services coordinated by
-            a lightweight message bus.
+            a ZeroMQ message bus and broker.
           </p>
           <ul class="text-sm space-y-2.5">
             <li>
-              <div class="text-gray-300 font-medium">serial_bridge</div>
-              <div class="text-gray-500 text-xs mt-0.5">UART link to Instinctus — reads telemetry, writes commands</div>
+              <div class="text-gray-300 font-medium">serial_service</div>
+              <div class="text-gray-500 text-xs mt-0.5">Serial link to Instinctus — reads telemetry, writes commands</div>
             </li>
             <li class="pt-2 border-t border-gray-800">
               <div class="text-gray-300 font-medium">vision_service</div>
-              <div class="text-gray-500 text-xs mt-0.5">OAK-D depth perception, object detection via DepthAI</div>
+              <div class="text-gray-500 text-xs mt-0.5">OAK-D Pro W depth perception, object detection via DepthAI</div>
             </li>
             <li class="pt-2 border-t border-gray-800">
-              <div class="text-gray-300 font-medium">llm_service <span class="text-orange-400/60">(planned)</span></div>
-              <div class="text-gray-500 text-xs mt-0.5">Natural-language command processing via local LLM</div>
+              <div class="text-gray-300 font-medium">video_service</div>
+              <div class="text-gray-500 text-xs mt-0.5">Streaming video from OAK-D Pro W</div>
             </li>
             <li class="pt-2 border-t border-gray-800">
-              <div class="text-gray-300 font-medium">api_gateway</div>
+              <div class="text-gray-300 font-medium">hearing_service</div>
+              <div class="text-gray-500 text-xs mt-0.5">Audio location and processing with ReSpeaker 3.0</div>
+            </li>
+            <li class="pt-2 border-t border-gray-800">
+              <div class="text-gray-300 font-medium">audio_service</div>
+              <div class="text-gray-500 text-xs mt-0.5">Audio streaming from ReSpeaker 3.0</div>
+            </li>
+            <li class="pt-2 border-t border-gray-800">
+              <div class="text-gray-300 font-medium">gateway_service</div>
               <div class="text-gray-500 text-xs mt-0.5">WebSocket server — exposes telemetry and commands to Explorator</div>
             </li>
           </ul>
@@ -256,24 +232,17 @@
             <tbody class="divide-y divide-gray-800">
               <tr>
                 <td class="py-2 text-gray-500 pr-4">Platform</td>
-                <td class="py-2 text-gray-300">Jetson Orin Nano · JetPack</td>
+                <td class="py-2 text-gray-300">Jetson Orin Nano · JetPack 6.2</td>
               </tr>
               <tr>
                 <td class="py-2 text-gray-500 pr-4">Language</td>
-                <td class="py-2 text-gray-300">Python 3.10+</td>
+                <td class="py-2 text-gray-300">Python 3</td>
               </tr>
               <tr>
                 <td class="py-2 text-gray-500 pr-4">Vision SDK</td>
                 <td class="py-2 text-gray-300">DepthAI / depthai-python</td>
               </tr>
               <tr>
-                <td class="py-2 text-gray-500 pr-4">Serial</td>
-                <td class="py-2 text-gray-300">pyserial · USB-C UART</td>
-              </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">Networking</td>
-                <td class="py-2 text-gray-300">asyncio · websockets</td>
-              </tr>
             </tbody>
           </table>
         </div>
@@ -300,11 +269,12 @@
             manual control.
           </p>
           <ul class="text-sm text-gray-500 space-y-1.5">
-            <li>Real-time telemetry dashboard (tilt, speed, distance)</li>
-            <li>Live camera feeds from Cogitator</li>
-            <li>Manual drive controls (keyboard / gamepad planned)</li>
+            <li>Real-time telemetry dashboard</li>
+            <li>Live camera and audio feeds from Cogitator</li>
+            <li>Manual text commands</li>
             <li>PID tuning interface</li>
-            <li>Connection status + reconnection logic</li>
+            <li>Hardware Diagnostics view</li>
+            <li>Data Logger</li>
           </ul>
         </div>
         <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
@@ -327,10 +297,6 @@
                 <td class="py-2 text-gray-500 pr-4">Networking</td>
                 <td class="py-2 text-gray-300">WebSocket client</td>
               </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">Targets</td>
-                <td class="py-2 text-gray-300">macOS · Windows · Linux</td>
-              </tr>
             </tbody>
           </table>
         </div>
@@ -344,7 +310,7 @@
       </h2>
       <p class="text-gray-400 text-sm max-w-2xl mb-8">
         Calvin's firmware development relies on two purpose-built tools that replace the standard
-        Arduino IDE workflow with a faster, scriptable CLI paired with a graphical companion app.
+        Arduino IDE workflow with a simple, scriptable CLI wrapper paired with a graphical companion app.
         Servitor depends on grot — it shells out to <code class="text-gray-300">grot build</code>
         and <code class="text-gray-300">grot load</code> under the hood.
       </p>
@@ -360,7 +326,7 @@
             A friendly CLI wrapper around <code class="text-gray-300">arduino-cli</code> and <code class="text-gray-300">teensy_loader_cli</code>.
             Reads a per-project <code class="text-gray-300">.grotconfig</code> TOML file for board
             FQBN, port, and sketch path, then exposes memorable sub-commands for the most common
-            development loops.
+            development loops. For example:
           </p>
           <ul class="text-sm space-y-2.5">
             <li>
@@ -370,14 +336,6 @@
             <li class="pt-2 border-t border-gray-800">
               <div class="text-gray-300 font-mono">grot load</div>
               <div class="text-gray-500 text-xs mt-0.5">Upload the compiled binary to the connected board</div>
-            </li>
-            <li class="pt-2 border-t border-gray-800">
-              <div class="text-gray-300 font-mono">grot ports</div>
-              <div class="text-gray-500 text-xs mt-0.5">List available serial ports and identify Arduino connections</div>
-            </li>
-            <li class="pt-2 border-t border-gray-800">
-              <div class="text-gray-300 font-mono">grot init</div>
-              <div class="text-gray-500 text-xs mt-0.5">Scaffold a <code class="text-gray-400">.grotconfig</code> template in the project root</div>
             </li>
           </ul>
         </div>
@@ -399,7 +357,6 @@
             <li>Serial monitor — real-time text view with send capability</li>
             <li>Serial plotter — live charts from <code class="text-gray-400">key:value</code> data streamed off the board</li>
             <li>9 OKLCH themes, persistent light/dark mode preference</li>
-            <li>Targets macOS, Windows, and Linux</li>
           </ul>
         </div>
 
@@ -437,14 +394,14 @@
           <p class="text-gray-400 text-sm">Cross-platform desktop monitoring and control app</p>
           <div class="text-orange-400 text-xs mt-3">github.com/fungus-wine/calvin_explorator →</div>
         </a>
-        <a href="https://github.com/fungus-wine/librarius" target="_blank" rel="noopener"
+        <a href="https://github.com/fungus-wine/fission" target="_blank" rel="noopener"
            class="bg-gray-900 border border-gray-800 hover:border-orange-600 rounded-xl p-5 transition-colors block">
           <div class="flex items-center justify-between mb-2">
-            <span class="font-semibold">librarius</span>
-            <span class="text-xs text-gray-500 font-mono bg-gray-800 px-2 py-1 rounded">Arduino C++</span>
+            <span class="font-semibold">fission</span>
+            <span class="text-xs text-gray-500 font-mono bg-gray-800 px-2 py-1 rounded">Ruby</span>
           </div>
-          <p class="text-gray-400 text-sm">Monorepo containing InstinctusKit shared library</p>
-          <div class="text-orange-400 text-xs mt-3">github.com/fungus-wine/librarius →</div>
+          <p class="text-gray-400 text-sm">Processor for Autodesk Fusion CAM files and the Makera Carvera</p>
+          <div class="text-orange-400 text-xs mt-3">github.com/fungus-wine/fission →</div>
         </a>
         <a href="https://github.com/fungus-wine/grot" target="_blank" rel="noopener"
            class="bg-gray-900 border border-gray-800 hover:border-orange-600 rounded-xl p-5 transition-colors block">
