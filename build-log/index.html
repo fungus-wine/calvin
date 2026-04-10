@@ -1,0 +1,40 @@
+---
+layout: default
+title: Build Log
+permalink: /build-log/
+---
+
+<!-- Page header -->
+<header class="max-w-5xl mx-auto px-6 pt-14 pb-10">
+  <p class="text-orange-400 text-sm font-semibold tracking-widest uppercase mb-2">Progress</p>
+  <h1 class="text-4xl font-bold mb-4">Build Log</h1>
+  <p class="text-gray-400 text-lg max-w-2xl">
+    A running record of Calvin's construction and development — newest entries first.
+  </p>
+</header>
+
+<main class="max-w-3xl mx-auto px-6 pb-20">
+  <div class="relative">
+    {% for post in paginator.posts %}
+      {% include build_entry.html post=post %}
+    {% endfor %}
+  </div>
+
+  {% if paginator.total_pages > 1 %}
+    <nav class="flex justify-between items-center mt-12 text-sm border-t border-gray-800 pt-6">
+      {% if paginator.previous_page %}
+        <a href="{{ paginator.previous_page_path | relative_url }}" class="text-orange-400 hover:text-orange-300 transition-colors">← Newer</a>
+      {% else %}
+        <span class="text-gray-700">← Newer</span>
+      {% endif %}
+
+      <span class="text-gray-500 font-mono">Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
+
+      {% if paginator.next_page %}
+        <a href="{{ paginator.next_page_path | relative_url }}" class="text-orange-400 hover:text-orange-300 transition-colors">Older →</a>
+      {% else %}
+        <span class="text-gray-700">Older →</span>
+      {% endif %}
+    </nav>
+  {% endif %}
+</main>

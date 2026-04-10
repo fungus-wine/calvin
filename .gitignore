@@ -2,3 +2,8 @@
 Thumbs.db
 node_modules/
 *.log
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.bundle/
+vendor/

@@ -1,95 +1,105 @@
 # Calvin Documentation Website – CLAUDE.md
 
 ## Project Overview
-Static multi-page documentation site for the Calvin self-balancing robot project.
-Hosted on GitHub Pages. No build step required.
+Jekyll-based documentation site for the Calvin self-balancing robot. Deployed to
+GitHub Pages / Netlify as static HTML.
 
 ## Tech Stack
-- **HTML5** – plain, human-editable HTML files
-- **Tailwind CSS** – loaded via CDN play script (no npm, no PostCSS, no build)
-- **custom.css** – minimal hand-written overrides in `assets/css/custom.css`
-
-## Tailwind CDN Approach
-Every page includes this in `<head>`:
-```html
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="assets/css/custom.css">
-```
-The CDN script compiles Tailwind on the fly in the browser. This means:
-- No `tailwind.config.js` needed
-- No build commands
-- Works with `file://` locally and GitHub Pages without any CI
+- **Jekyll** (via `github-pages` gem) with `jekyll-paginate`, `jekyll-seo-tag`, `jekyll-sitemap`
+- **Tailwind CSS** (v3, standalone CLI) — compiled to `assets/css/tailwind.css` and committed
+- **custom.css** — hand-written overrides in `assets/css/custom.css`
+- **Lucide icons** — loaded via CDN in the footer only
 
 ## File Structure
 ```
 calvin/
 ├── CLAUDE.md
-├── .gitignore
-├── .claudeignore
-├── index.html          ← Home / hero
-├── hardware.html       ← Hardware deep-dive
-├── software.html       ← Software architecture
-├── gallery.html        ← Photos + YouTube embeds
-├── build-log.html      ← Chronological build log
+├── Gemfile / Gemfile.lock              ← Ruby deps (github-pages)
+├── package.json / package-lock.json    ← Node deps (tailwindcss CLI)
+├── tailwind.config.js                  ← Tailwind content paths
+├── tailwind.src.css                    ← @tailwind directives (input)
+├── _config.yml                         ← Jekyll config
+├── _layouts/
+│   ├── default.html                    ← Shell: <head>, nav, footer
+│   ├── page.html                       ← Passthrough for top-level pages
+│   └── post.html                       ← Build-log post wrapper
+├── _includes/
+│   ├── build_entry.html                ← Single post card
+│   ├── photo_placeholder.html
+│   └── video_placeholder.html
+├── _posts/                             ← Build-log markdown entries
+├── index.html                          ← Home
+├── mechanical.html / hardware.html / software.html / gallery.html
+├── build-log/index.html                ← Paginated build log
 └── assets/
-    ├── images/         ← Local photos (ignored by Claude)
+    ├── images/                         ← Photos (ignored by Claude)
     └── css/
+        ├── tailwind.css                ← Built output (committed)
         └── custom.css
 ```
+
+## Building Tailwind CSS
+Whenever you change HTML class names, rebuild:
+```bash
+npm run build:css       # one-shot, minified
+npm run watch:css       # watches and rebuilds on change
+```
+The output `assets/css/tailwind.css` is **committed** — GitHub Pages does not run
+a Node build step. If you edit class names and forget to rebuild, the new classes
+will be missing from production CSS.
+
+## Local Development
+```bash
+bundle exec jekyll serve
+# http://localhost:4000
+```
+Run `npm run watch:css` in a second terminal if you are editing class names.
+
+## Navigation Pattern
+The nav lives in `_layouts/default.html`. Active-link styling is driven by
+`page.url` matching — no per-page edits required. Each link also sets
+`aria-current="page"` when active.
 
 ## Related GitHub Repositories
 | Repo | Description |
 |------|-------------|
-| `github.com/fungus-wine/calvin_instinctus` | Arduino GIGA R1 real-time balance firmware |
+| `github.com/fungus-wine/calvin_instinctus` | Teensy 4.1 real-time firmware (balance + CAN) |
 | `github.com/fungus-wine/calvin_cogitator` | Jetson Orin Nano AI / vision / LLM layer |
 | `github.com/fungus-wine/calvin_explorator` | Electron + Vue 3 desktop monitoring app |
 | `github.com/fungus-wine/librarius` | Shared Arduino library (InstinctusKit) |
 
-## Navigation Pattern
-Each page contains the full `<nav>` block copied verbatim. The current page's link
-gets the `.nav-active` class (defined in `custom.css`) added to its `<a>` tag.
+## How to Add a Build Log Post
+1. Create `_posts/YYYY-MM-DD-slug.md` with front matter:
+   ```yaml
+   ---
+   title: My Post Title
+   date: YYYY-MM-DD HH:MM:SS -0700
+   tag: firmware, mechanical
+   ---
+   ```
+2. Body is Markdown. Images go in `assets/images/` and are referenced via
+   `{{ '/assets/images/foo.webp' | relative_url }}`.
 
-Example – on `hardware.html`, the Hardware link should be:
-```html
-<a href="hardware.html" class="nav-active">Hardware</a>
-```
-All other links are plain:
-```html
-<a href="index.html" class="hover:text-orange-400 transition-colors">Home</a>
-```
+Permalink is `/build-log/:year-:month-:day-:slug/`.
 
 ## How to Add a Gallery Image
-1. Drop the image into `assets/images/`
-2. Open `gallery.html`
-3. Copy an existing `<figure>` block in the grid and update:
-   - `src="assets/images/YOUR_PHOTO.jpg"`
-   - `alt="..."` description
-   - `<figcaption>` text
+1. Drop image into `assets/images/`
+2. Open `gallery.html` — replace one `{% include photo_placeholder.html %}`
+   call with a proper `<figure>` block containing `<img src="{{ '/assets/images/X' | relative_url }}">`
+3. Rebuild Tailwind if you add new utility classes.
 
 ## How to Add a YouTube Embed
-In `gallery.html`, find the `<!-- YouTube Embeds -->` section and copy an existing
-`<div class="aspect-video ...">` block. Replace the `src` URL:
-```html
-<iframe src="https://www.youtube.com/embed/VIDEO_ID" ...></iframe>
-```
-
-## How to Add a Build Log Entry
-In `build-log.html`, entries are newest-first. Copy the topmost `<article>` block
-and paste it above the others. Update:
-- `<h2>` date heading
-- `<p>` description text
-- Optionally add an `<img>` element inside the article
+In `gallery.html`, replace a `{% include video_placeholder.html %}` call with a
+real `<figure>` containing an `<iframe src="https://www.youtube.com/embed/VIDEO_ID">`.
 
 ## GitHub Pages Deployment
-Push the `main` branch to GitHub. In repo Settings → Pages, set source to
-**main branch / root**. The site will be available at:
-`https://fungus-wine.github.io/<repo-name>/`
+Push `main`. Repo Settings → Pages → source: `main` / root. The `github-pages`
+gem version pins compatible Jekyll + plugins. No CI needed because Tailwind
+output is committed.
 
-No build action required — GitHub Pages serves static HTML directly.
-
-## Local Development
-```bash
-python3 -m http.server 8080
-# then open http://localhost:8080
-```
-Or just open any `.html` file directly in a browser (`file://` path).
+## Things to Watch
+- **Never reintroduce the Tailwind CDN** — it's a dev-only tool and was replaced
+  with a prebuilt, minified CSS file.
+- **Remember to rebuild CSS** after class changes. Consider running
+  `npm run build:css` as part of your pre-commit flow.
+- `_site/`, `node_modules/`, and `.jekyll-cache/` are gitignored.

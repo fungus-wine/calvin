@@ -1,0 +1,21 @@
+{%- assign post = include.post -%}
+<article class="build-entry mb-12">
+  <div class="flex items-center gap-3 mb-1">
+    <span class="w-3 h-3 rounded-full bg-orange-400 shrink-0 -ml-[1.6875rem] ring-4 ring-gray-950"></span>
+    <span class="text-sm text-orange-400 font-mono">{{ post.date | date: "%Y-%m-%d" }}</span>
+    {%- if post.tag -%}
+      {%- assign tags = post.tag | split: "," -%}
+      {%- for t in tags -%}
+        <span class="text-xs text-gray-600 bg-gray-900 border border-gray-800 px-2 py-0.5 rounded-full">{{ t | strip }}</span>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+  {%- if post.title -%}
+    <h2 class="text-lg font-bold text-gray-100 mt-3 mb-4">
+      <a href="{{ post.url | relative_url }}" class="hover:text-orange-400 transition-colors">{{ post.title }}</a>
+    </h2>
+  {%- endif -%}
+  <div class="prose prose-invert prose-orange prose-sm max-w-none">
+    {{ post.content }}
+  </div>
+</article>

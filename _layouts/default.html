@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en' }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#030712">
+  <link rel="icon" type="image/svg+xml" href="{{ '/assets/images/favicon.svg' | relative_url }}">
+  {% seo %}
+  <link rel="stylesheet" href="{{ '/assets/css/tailwind.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
+  <script src="https://unpkg.com/lucide@0.453.0/dist/umd/lucide.min.js"
+          integrity="sha384-0v3Wh0ZtiQBYCYywQoeMDA5mAw5Z01p0lhorqy0BlwFrcN6u3lmN7K0U/e1uezmr"
+          crossorigin="anonymous" defer></script>
+</head>
+<body class="bg-gray-950 text-gray-100 min-h-screen">
+
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[60] focus:bg-orange-500 focus:text-white focus:px-3 focus:py-2 focus:rounded">Skip to content</a>
+
+  <!-- Navigation -->
+  <nav aria-label="Main navigation" class="bg-gray-900 border-b border-gray-800 sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto px-6 py-3 flex items-center gap-8">
+      <a href="{{ '/' | relative_url }}" class="font-bold text-orange-400 text-lg tracking-tight">CALVIN</a>
+      <div class="flex gap-6 text-sm text-gray-300">
+        {%- for item in site.data.nav -%}
+          {%- assign active = false -%}
+          {%- if item.match == "/" and page.url == "/" -%}
+            {%- assign active = true -%}
+          {%- elsif item.match != "/" and page.url contains item.match -%}
+            {%- assign active = true -%}
+          {%- endif -%}
+          <a href="{{ item.href | relative_url }}"
+             class="{% if active %}nav-active{% else %}hover:text-orange-400 transition-colors{% endif %}"
+             {% if active %}aria-current="page"{% endif %}>{{ item.label }}</a>
+        {%- endfor -%}
+      </div>
+    </div>
+  </nav>
+
+  <div id="main-content">
+    {{ content }}
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 border-t border-gray-800">
+    <div class="max-w-5xl mx-auto px-6 py-12">
+      <h2 class="text-xl font-bold mb-6 text-gray-300">Explore the documentation</h2>
+      <nav aria-label="Footer navigation" class="grid grid-cols-2 md:grid-cols-5 gap-4">
+        {%- for item in site.data.nav -%}
+          {%- if item.icon -%}
+            <a href="{{ item.href | relative_url }}"
+               class="bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg p-4 transition-colors text-center">
+              <i data-lucide="{{ item.icon }}" aria-hidden="true" class="w-6 h-6 mx-auto mb-2 text-orange-400"></i>
+              <div class="font-semibold text-sm">{{ item.label }}</div>
+              <div class="text-xs text-gray-500 mt-1">{{ item.subtitle }}</div>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </nav>
+    </div>
+    <div class="border-t border-gray-800 py-6 text-center text-gray-600 text-sm">
+      <div class="max-w-5xl mx-auto px-6">
+        Calvin Robot Project &nbsp;·&nbsp;
+        <a href="https://github.com/fungus-wine" target="_blank" rel="noopener"
+           class="hover:text-gray-400 transition-colors">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      if (window.lucide) { window.lucide.createIcons(); }
+    });
+  </script>
+</body>
+</html>

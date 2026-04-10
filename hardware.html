@@ -1,435 +1,359 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hardware – Calvin Robot</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-  <link rel="stylesheet" href="assets/css/custom.css">
-</head>
-<body class="bg-gray-950 text-gray-100 min-h-screen">
+---
+layout: page
+title: Hardware
+permalink: /hardware/
+---
 
-  <!-- Navigation -->
-  <nav class="bg-gray-900 border-b border-gray-800 sticky top-0 z-50">
-    <div class="max-w-5xl mx-auto px-6 py-3 flex items-center gap-8">
-      <a href="index.html" class="font-bold text-orange-400 text-lg tracking-tight">CALVIN</a>
-      <div class="flex gap-6 text-sm text-gray-300">
-        <a href="index.html" class="hover:text-orange-400 transition-colors">Home</a>
-        <a href="mechanical.html" class="hover:text-orange-400 transition-colors">Mechanical</a>
-        <a href="hardware.html" class="nav-active">Hardware</a>
-        <a href="software.html" class="hover:text-orange-400 transition-colors">Software</a>
-        <a href="gallery.html" class="hover:text-orange-400 transition-colors">Gallery</a>
-        <a href="build-log.html" class="hover:text-orange-400 transition-colors">Build Log</a>
+{% include stub_notice.html %}
+
+<!-- Page header -->
+<header class="max-w-5xl mx-auto px-6 pt-14 pb-10">
+  <p class="text-orange-400 text-sm font-semibold tracking-widest uppercase mb-2">Documentation</p>
+  <h1 class="text-4xl font-bold mb-4">Hardware</h1>
+  <p class="text-gray-400 text-lg max-w-2xl">
+    Calvin is built around two compute platforms, a brushless drive system, and a suite of
+    sensors — all packaged into a compact wheeled chassis.
+  </p>
+</header>
+
+<main class="max-w-5xl mx-auto px-6 pb-20 space-y-16">
+
+  <!-- System overview -->
+  <section>
+    <h2 class="text-2xl font-bold mb-6">System Overview</h2>
+    <div class="bg-gray-900/40 border border-gray-800 rounded-2xl p-6 md:p-10">
+      <div class="flex flex-col items-stretch gap-0 max-w-xl mx-auto">
+
+        <!-- COGITATOR -->
+        <div class="rounded-xl border border-emerald-500/30 bg-emerald-500/5 overflow-hidden">
+          <div class="flex items-center justify-between px-5 py-3 border-b border-emerald-500/20">
+            <span class="font-mono font-bold tracking-widest text-emerald-300 text-xs uppercase">Cogitator</span>
+            <span class="text-xs text-gray-500 font-mono">Jetson Orin Nano Super 8 GB</span>
+          </div>
+          <div class="px-5 py-4">
+            <p class="text-xs text-gray-500 leading-relaxed">OAK-D Pro W stereo camera &nbsp;·&nbsp; Vision inference &nbsp;·&nbsp; LLM processing <span class="text-orange-400/50">(planned)</span> &nbsp;·&nbsp; WebSocket API gateway</p>
+          </div>
+        </div>
+
+        <!-- Connector: USB-C Serial -->
+        <div class="flex flex-col items-center py-3 gap-1">
+          <div class="w-px h-3 bg-gray-700"></div>
+          <span class="font-mono text-xs text-gray-600 border border-gray-700/50 rounded-full bg-gray-950 px-3 py-0.5">USB-C Serial (UART)</span>
+          <div class="w-px h-3 bg-gray-700"></div>
+          <span class="text-gray-600 leading-none text-sm">▾</span>
+        </div>
+
+        <!-- INSTINCTUS -->
+        <div class="rounded-xl border border-orange-500/30 bg-orange-500/5 overflow-hidden">
+          <div class="flex items-center justify-between px-5 py-3 border-b border-orange-500/20">
+            <span class="font-mono font-bold tracking-widest text-orange-300 text-xs uppercase">Instinctus</span>
+            <span class="text-xs text-gray-500 font-mono">Teensy 4.1</span>
+          </div>
+          <div class="px-5 py-4">
+            <div class="text-orange-400/50 font-mono text-xs mb-1.5">ARM Cortex-M7 · 600 MHz</div>
+            <p class="text-xs text-gray-500 leading-relaxed">IMU &amp; ToF reads &nbsp;·&nbsp; Serial bridge &nbsp;·&nbsp; PID balance loop &nbsp;·&nbsp; ODrive CAN commands</p>
+          </div>
+          <div class="border-t border-orange-500/10 px-5 py-3 flex items-center gap-2">
+            <span class="text-orange-400/40 text-xs font-mono">ICM-20948 IMU &nbsp;·&nbsp; VL53L4CX × 2 ToF</span>
+            <p class="text-xs text-gray-600">via I²C</p>
+          </div>
+        </div>
+
+        <!-- Connector: CAN Bus -->
+        <div class="flex flex-col items-center pt-3 pb-1 gap-1">
+          <div class="w-px h-3 bg-gray-700"></div>
+          <span class="font-mono text-xs text-gray-600 border border-gray-700/50 rounded-full bg-gray-950 px-3 py-0.5">CAN Bus &nbsp;·&nbsp; 250 kbps &nbsp;×&nbsp; 2</span>
+          <div class="w-px h-3 bg-gray-700"></div>
+          <span class="text-gray-600 leading-none text-sm">▾</span>
+        </div>
+
+        <!-- ODrives -->
+        <div class="grid grid-cols-2 gap-3">
+          <div class="rounded-xl border border-gray-700/50 bg-gray-900/50 overflow-hidden">
+            <div class="px-4 py-3 text-center border-b border-gray-700/40">
+              <div class="text-gray-600 font-mono text-xs mb-0.5">ODrive S1</div>
+              <div class="text-gray-300 text-sm font-medium">Left Controller</div>
+            </div>
+            <div class="px-4 py-3 text-center">
+              <div class="text-gray-600 font-mono text-xs mb-0.5">D5312S Motor</div>
+              <div class="text-gray-400 text-xs">170 KV · direct drive</div>
+            </div>
+          </div>
+          <div class="rounded-xl border border-gray-700/50 bg-gray-900/50 overflow-hidden">
+            <div class="px-4 py-3 text-center border-b border-gray-700/40">
+              <div class="text-gray-600 font-mono text-xs mb-0.5">ODrive S1</div>
+              <div class="text-gray-300 text-sm font-medium">Right Controller</div>
+            </div>
+            <div class="px-4 py-3 text-center">
+              <div class="text-gray-600 font-mono text-xs mb-0.5">D5312S Motor</div>
+              <div class="text-gray-400 text-xs">170 KV · direct drive</div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
-  </nav>
+  </section>
 
-  <!-- AI stub warning -->
-  <div class="max-w-5xl mx-auto px-6 pt-6">
-    <div class="bg-gray-900/40 border border-gray-800 rounded-xl px-4 py-3 text-gray-500 text-sm text-center">
-      AI-generated stub — much of the information on this site is incorrect or placeholder.
-    </div>
-  </div>
-
-  <!-- Page header -->
-  <header class="max-w-5xl mx-auto px-6 pt-14 pb-10">
-    <p class="text-orange-400 text-sm font-semibold tracking-widest uppercase mb-2">Documentation</p>
-    <h1 class="text-4xl font-bold mb-4">Hardware</h1>
-    <p class="text-gray-400 text-lg max-w-2xl">
-      Calvin is built around two compute platforms, a brushless drive system, and a suite of
-      sensors — all packaged into a compact wheeled chassis.
-    </p>
-  </header>
-
-  <main class="max-w-5xl mx-auto px-6 pb-20 space-y-16">
-
-    <!-- System overview -->
-    <section>
-      <h2 class="text-2xl font-bold mb-6">System Overview</h2>
-      <div class="bg-gray-900/40 border border-gray-800 rounded-2xl p-6 md:p-10">
-        <div class="flex flex-col items-stretch gap-0 max-w-xl mx-auto">
-
-          <!-- COGITATOR -->
-          <div class="rounded-xl border border-emerald-500/30 bg-emerald-500/5 overflow-hidden">
-            <div class="flex items-center justify-between px-5 py-3 border-b border-emerald-500/20">
-              <span class="font-mono font-bold tracking-widest text-emerald-300 text-xs uppercase">Cogitator</span>
-              <span class="text-xs text-gray-500 font-mono">Jetson Orin Nano Super 8 GB</span>
-            </div>
-            <div class="px-5 py-4">
-              <p class="text-xs text-gray-500 leading-relaxed">OAK-D Pro W stereo camera &nbsp;·&nbsp; Vision inference &nbsp;·&nbsp; LLM processing <span class="text-orange-400/50">(planned)</span> &nbsp;·&nbsp; WebSocket API gateway</p>
-            </div>
-          </div>
-
-          <!-- Connector: USB-C Serial -->
-          <div class="flex flex-col items-center py-3 gap-1">
-            <div class="w-px h-3 bg-gray-700"></div>
-            <span class="font-mono text-xs text-gray-600 border border-gray-700/50 rounded-full bg-gray-950 px-3 py-0.5">USB-C Serial (UART)</span>
-            <div class="w-px h-3 bg-gray-700"></div>
-            <span class="text-gray-600 leading-none text-sm">▾</span>
-          </div>
-
-          <!-- INSTINCTUS -->
-          <div class="rounded-xl border border-orange-500/30 bg-orange-500/5 overflow-hidden">
-            <div class="flex items-center justify-between px-5 py-3 border-b border-orange-500/20">
-              <span class="font-mono font-bold tracking-widest text-orange-300 text-xs uppercase">Instinctus</span>
-              <span class="text-xs text-gray-500 font-mono">Teensy 4.1</span>
-            </div>
-            <div class="px-5 py-4">
-              <div class="text-orange-400/50 font-mono text-xs mb-1.5">ARM Cortex-M7 · 600 MHz</div>
-              <p class="text-xs text-gray-500 leading-relaxed">IMU &amp; ToF reads &nbsp;·&nbsp; Serial bridge &nbsp;·&nbsp; PID balance loop &nbsp;·&nbsp; ODrive CAN commands</p>
-            </div>
-            <div class="border-t border-orange-500/10 px-5 py-3 flex items-center gap-2">
-              <span class="text-orange-400/40 text-xs font-mono">ICM-20948 IMU &nbsp;·&nbsp; VL53L4CX × 2 ToF</span>
-              <p class="text-xs text-gray-600">via I²C</p>
-            </div>
-          </div>
-
-          <!-- Connector: CAN Bus -->
-          <div class="flex flex-col items-center pt-3 pb-1 gap-1">
-            <div class="w-px h-3 bg-gray-700"></div>
-            <span class="font-mono text-xs text-gray-600 border border-gray-700/50 rounded-full bg-gray-950 px-3 py-0.5">CAN Bus &nbsp;·&nbsp; 250 kbps &nbsp;×&nbsp; 2</span>
-            <div class="w-px h-3 bg-gray-700"></div>
-            <span class="text-gray-600 leading-none text-sm">▾</span>
-          </div>
-
-          <!-- ODrives -->
-          <div class="grid grid-cols-2 gap-3">
-            <div class="rounded-xl border border-gray-700/50 bg-gray-900/50 overflow-hidden">
-              <div class="px-4 py-3 text-center border-b border-gray-700/40">
-                <div class="text-gray-600 font-mono text-xs mb-0.5">ODrive S1</div>
-                <div class="text-gray-300 text-sm font-medium">Left Controller</div>
-              </div>
-              <div class="px-4 py-3 text-center">
-                <div class="text-gray-600 font-mono text-xs mb-0.5">D5312S Motor</div>
-                <div class="text-gray-400 text-xs">170 KV · direct drive</div>
-              </div>
-            </div>
-            <div class="rounded-xl border border-gray-700/50 bg-gray-900/50 overflow-hidden">
-              <div class="px-4 py-3 text-center border-b border-gray-700/40">
-                <div class="text-gray-600 font-mono text-xs mb-0.5">ODrive S1</div>
-                <div class="text-gray-300 text-sm font-medium">Right Controller</div>
-              </div>
-              <div class="px-4 py-3 text-center">
-                <div class="text-gray-600 font-mono text-xs mb-0.5">D5312S Motor</div>
-                <div class="text-gray-400 text-xs">170 KV · direct drive</div>
-              </div>
-            </div>
-          </div>
-
-        </div>
+  <!-- Teensy 4.1 -->
+  <section>
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+      <span class="text-orange-400">01</span> Teensy 4.1
+    </h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <h3 class="font-semibold text-orange-300 mb-3">Single-Core Architecture</h3>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+          The Teensy 4.1 is built on the NXP i.MX RT1062, an ARM Cortex-M7 running at 600 MHz.
+          All Instinctus tasks — sensor reads, serial comms, the PID balance loop, and CAN bus
+          motor commands — run on this single high-speed core.
+        </p>
+        <ul class="space-y-2 text-sm text-gray-300">
+          <li>Reads IMU and ToF sensors via I²C</li>
+          <li>Manages serial link to Cogitator</li>
+          <li>Runs PID balance control loop</li>
+          <li>Drives ODrive motor commands over CAN bus</li>
+        </ul>
       </div>
-    </section>
-
-    <!-- Teensy 4.1 -->
-    <section>
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-        <span class="text-orange-400">01</span> Teensy 4.1
-      </h2>
-      <div class="grid md:grid-cols-2 gap-6">
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <h3 class="font-semibold text-orange-300 mb-3">Single-Core Architecture</h3>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            The Teensy 4.1 is built on the NXP i.MX RT1062, an ARM Cortex-M7 running at 600 MHz.
-            All Instinctus tasks — sensor reads, serial comms, the PID balance loop, and CAN bus
-            motor commands — run on this single high-speed core.
-          </p>
-          <ul class="space-y-2 text-sm text-gray-300">
-            <li>Reads IMU and ToF sensors via I²C</li>
-            <li>Manages serial link to Cogitator</li>
-            <li>Runs PID balance control loop</li>
-            <li>Drives ODrive motor commands over CAN bus</li>
-          </ul>
-        </div>
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <h3 class="font-semibold text-orange-300 mb-3">Key Specs</h3>
-          <table class="w-full text-sm">
-            <tbody class="divide-y divide-gray-800">
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">SoC</td>
-                <td class="py-2 text-gray-300">NXP i.MX RT1062</td>
-              </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">Core</td>
-                <td class="py-2 text-gray-300">ARM Cortex-M7 · 600 MHz</td>
-              </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">RAM</td>
-                <td class="py-2 text-gray-300">1 MB (512 KB tightly-coupled + 512 KB general)</td>
-              </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">Flash</td>
-                <td class="py-2 text-gray-300">8 MB onboard</td>
-              </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">Connectivity</td>
-                <td class="py-2 text-gray-300">USB · Ethernet · SD card</td>
-              </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">CAN bus</td>
-                <td class="py-2 text-gray-300">Built-in FlexCAN · 250 kbps</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- Sensors -->
-    <section>
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-        <span class="text-orange-400">02</span> Sensors
-      </h2>
-      <div class="grid md:grid-cols-2 gap-6">
-
-        <!-- IMU -->
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <div class="flex items-start justify-between mb-3">
-            <h3 class="font-semibold text-orange-300">ICM-20948 IMU <span class="text-gray-600 font-normal text-xs">(Adafruit #4554)</span></h3>
-            <span class="text-xs text-gray-600 font-mono bg-gray-800 px-2 py-1 rounded">I²C</span>
-          </div>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            9-axis IMU providing accelerometer, gyroscope, and magnetometer data.
-            Used to estimate the robot's tilt angle for the balance control loop.
-          </p>
-          <ul class="text-sm text-gray-500 space-y-1">
-            <li>3-axis gyroscope (±2000 dps)</li>
-            <li>3-axis accelerometer (±16 g)</li>
-            <li>3-axis magnetometer (±4900 µT)</li>
-            <li>Read via I²C, fused angle feeds balance loop</li>
-          </ul>
-        </div>
-
-        <!-- ToF -->
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <div class="flex items-start justify-between mb-3">
-            <h3 class="font-semibold text-orange-300">VL53L4CX Time-of-Flight (× 2) <span class="text-gray-600 font-normal text-xs">(Adafruit #5425)</span></h3>
-            <span class="text-xs text-gray-600 font-mono bg-gray-800 px-2 py-1 rounded">I²C</span>
-          </div>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            Dual front-facing ToF ranging sensors for obstacle detection. Mounted at different
-            heights to detect both floor obstacles and objects at mid-body level.
-          </p>
-          <ul class="text-sm text-gray-500 space-y-1">
-            <li>Range: up to 6 m</li>
-            <li>940 nm invisible laser</li>
-            <li>Multi-target detection capability</li>
-            <li>I²C address offset via XSHUT pins</li>
-          </ul>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Drive System -->
-    <section>
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-        <span class="text-orange-400">03</span> Drive System
-      </h2>
-      <div class="grid md:grid-cols-3 gap-6">
-
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <h3 class="font-semibold text-orange-300 mb-3">ODrive S1 (× 2)</h3>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            Single-axis brushless motor controllers with integrated encoder support.
-            Communicate with Instinctus via CAN bus using the ODrive CAN protocol.
-          </p>
-          <ul class="text-sm text-gray-500 space-y-1">
-            <li>CAN bus · 250 kbps</li>
-            <li>Field-oriented control (FOC)</li>
-            <li>Velocity + torque modes</li>
-            <li>Onboard encoder interface</li>
-            <li>Up to 56 V / 40 A per axis</li>
-          </ul>
-        </div>
-
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <h3 class="font-semibold text-orange-300 mb-3">D5312S Motors (× 2)</h3>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            High-torque brushless outrunner motors commonly used in drone and robotics
-            applications. Direct drive — no gearbox.
-          </p>
-          <ul class="text-sm text-gray-500 space-y-1">
-            <li>Stator: 53 mm diameter</li>
-            <li>KV rating: ~170 KV</li>
-            <li>Peak torque: ~1.5 N·m</li>
-            <li>Direct drive · no gearbox</li>
-          </ul>
-        </div>
-
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <h3 class="font-semibold text-orange-300 mb-3">CAN Bus</h3>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            Both ODrive S1 controllers share a single CAN bus segment wired to the Teensy 4.1's
-            built-in FlexCAN peripheral.
-          </p>
-          <ul class="text-sm text-gray-500 space-y-1">
-            <li>Speed: 250 kbps</li>
-            <li>Topology: daisy-chain, 120 Ω terminator</li>
-            <li>Protocol: ODrive ASCII CAN</li>
-            <li>Node IDs: 0x01 (L), 0x02 (R)</li>
-          </ul>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Cogitator hardware -->
-    <section>
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-        <span class="text-orange-400">04</span> Jetson Orin Nano (Cogitator)
-      </h2>
-      <div class="grid md:grid-cols-2 gap-6">
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <h3 class="font-semibold text-orange-300 mb-3">Jetson Orin Nano Super 8 GB</h3>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            NVIDIA's Orin Nano Super module. Provides 67 TOPS of AI performance in a compact
-            form factor — more than sufficient for vision inference, object detection, and future
-            LLM tasks.
-          </p>
-          <table class="w-full text-sm">
-            <tbody class="divide-y divide-gray-800">
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">CPU</td>
-                <td class="py-2 text-gray-300">6-core Arm Cortex-A78AE</td>
-              </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">GPU</td>
-                <td class="py-2 text-gray-300">1024-core Ampere · 32 Tensor cores</td>
-              </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">AI Perf</td>
-                <td class="py-2 text-gray-300">67 TOPS</td>
-              </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">RAM</td>
-                <td class="py-2 text-gray-300">8 GB LPDDR5 (shared CPU/GPU)</td>
-              </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">Storage</td>
-                <td class="py-2 text-gray-300">NVMe SSD via M.2</td>
-              </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">OS</td>
-                <td class="py-2 text-gray-300">JetPack 6.2 (Ubuntu 22.04 base)</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <h3 class="font-semibold text-orange-300 mb-3">OAK-D Pro W Camera</h3>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            Luxonis OAK-D Pro W is a wide-angle stereo depth camera with onboard DepthAI
-            inference acceleration. Connects to the Jetson via USB-C.
-          </p>
-          <ul class="text-sm text-gray-500 space-y-1.5">
-            <li>Stereo depth at up to 30 fps</li>
-            <li>Wide FOV RGB + mono stereo pair</li>
-            <li>Onboard MyriadX VPU for neural inference</li>
-            <li>Active dot projector (Pro) for low-light depth</li>
-            <li>USB 3.1 Gen 1 · DepthAI Python SDK</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Audio -->
-    <section>
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-        <span class="text-orange-400">05</span> Audio
-      </h2>
-      <div class="grid md:grid-cols-2 gap-6">
-
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <div class="flex items-start justify-between mb-3">
-            <h3 class="font-semibold text-orange-300">ReSpeaker 4-Mic Array</h3>
-            <span class="text-xs text-gray-600 font-mono bg-gray-800 px-2 py-1 rounded">USB</span>
-          </div>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            Seeed Studio's circular 4-microphone array, designed for far-field voice capture.
-            Connects to the Jetson Orin Nano via USB and presents as a standard ALSA audio device.
-            Used for wake-word detection and voice command input.
-          </p>
-          <ul class="text-sm text-gray-500 space-y-1">
-            <li>4 × MEMS microphones in circular layout</li>
-            <li>Up to 5 m pickup range</li>
-            <li>Onboard AEC, beamforming &amp; noise suppression</li>
-            <li>12 programmable RGB LEDs (via USB HID)</li>
-            <li>USB Audio Class — no driver required on Linux</li>
-          </ul>
-        </div>
-
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <div class="flex items-start justify-between mb-3">
-            <h3 class="font-semibold text-orange-300">Visaton FR58 + MAX98357A <span class="text-gray-600 font-normal text-xs">(Adafruit #3006)</span></h3>
-            <span class="text-xs text-gray-600 font-mono bg-gray-800 px-2 py-1 rounded">I²S</span>
-          </div>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            A Visaton FR 58 full-range driver (8 Ω) paired with the Adafruit MAX98357A I²S amplifier
-            breakout. The amp decodes I²S directly from the Jetson, requiring no
-            separate DAC. Output is mono, sufficient for voice synthesis and audio feedback.
-          </p>
-          <ul class="text-sm text-gray-500 space-y-1">
-            <li>Speaker: Visaton FR 58, 8 Ω, 2 W rated</li>
-            <li>Amp: MAX98357A · class D · up to 3.2 W @ 4 Ω</li>
-            <li>I²S input — BCLK, LRCLK, DIN from Jetson GPIO</li>
-            <li>Gain selectable via SD/MODE pin (6 / 9 / 12 / 15 dB)</li>
-            <li>No I²C address / no driver — PCM audio only</li>
-          </ul>
-        </div>
-
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Footer -->
-  <footer class="bg-gray-900 border-t border-gray-800">
-    <div class="max-w-5xl mx-auto px-6 py-12">
-      <h2 class="text-xl font-bold mb-6 text-gray-300">Explore the documentation</h2>
-      <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-        <a href="mechanical.html"
-           class="bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg p-4 transition-colors text-center">
-          <i data-lucide="wrench" class="w-6 h-6 mx-auto mb-2 text-orange-400"></i>
-          <div class="font-semibold text-sm">Mechanical</div>
-          <div class="text-xs text-gray-500 mt-1">Frame &amp; chassis</div>
-        </a>
-        <a href="hardware.html"
-           class="bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg p-4 transition-colors text-center">
-          <i data-lucide="cpu" class="w-6 h-6 mx-auto mb-2 text-orange-400"></i>
-          <div class="font-semibold text-sm">Hardware</div>
-          <div class="text-xs text-gray-500 mt-1">Specs &amp; components</div>
-        </a>
-        <a href="software.html"
-           class="bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg p-4 transition-colors text-center">
-          <i data-lucide="code-2" class="w-6 h-6 mx-auto mb-2 text-orange-400"></i>
-          <div class="font-semibold text-sm">Software</div>
-          <div class="text-xs text-gray-500 mt-1">Architecture &amp; code</div>
-        </a>
-        <a href="gallery.html"
-           class="bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg p-4 transition-colors text-center">
-          <i data-lucide="camera" class="w-6 h-6 mx-auto mb-2 text-orange-400"></i>
-          <div class="font-semibold text-sm">Gallery</div>
-          <div class="text-xs text-gray-500 mt-1">Photos &amp; videos</div>
-        </a>
-        <a href="build-log.html"
-           class="bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg p-4 transition-colors text-center">
-          <i data-lucide="scroll-text" class="w-6 h-6 mx-auto mb-2 text-orange-400"></i>
-          <div class="font-semibold text-sm">Build Log</div>
-          <div class="text-xs text-gray-500 mt-1">Progress updates</div>
-        </a>
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <h3 class="font-semibold text-orange-300 mb-3">Key Specs</h3>
+        <table class="w-full text-sm">
+          <tbody class="divide-y divide-gray-800">
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">SoC</td>
+              <td class="py-2 text-gray-300">NXP i.MX RT1062</td>
+            </tr>
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">Core</td>
+              <td class="py-2 text-gray-300">ARM Cortex-M7 · 600 MHz</td>
+            </tr>
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">RAM</td>
+              <td class="py-2 text-gray-300">1 MB (512 KB tightly-coupled + 512 KB general)</td>
+            </tr>
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">Flash</td>
+              <td class="py-2 text-gray-300">8 MB onboard</td>
+            </tr>
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">Connectivity</td>
+              <td class="py-2 text-gray-300">USB · Ethernet · SD card</td>
+            </tr>
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">CAN bus</td>
+              <td class="py-2 text-gray-300">Built-in FlexCAN · 250 kbps</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-    <div class="border-t border-gray-800 py-6 text-center text-gray-600 text-sm">
-      <div class="max-w-5xl mx-auto px-6">
-        Calvin Robot Project &nbsp;·&nbsp;
-        <a href="https://github.com/fungus-wine" target="_blank" rel="noopener"
-           class="hover:text-gray-400 transition-colors">GitHub</a>
+  </section>
+
+  <!-- Sensors -->
+  <section>
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+      <span class="text-orange-400">02</span> Sensors
+    </h2>
+    <div class="grid md:grid-cols-2 gap-6">
+
+      <!-- IMU -->
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <div class="flex items-start justify-between mb-3">
+          <h3 class="font-semibold text-orange-300">ICM-20948 IMU <span class="text-gray-600 font-normal text-xs">(Adafruit #4554)</span></h3>
+          <span class="text-xs text-gray-600 font-mono bg-gray-800 px-2 py-1 rounded">I²C</span>
+        </div>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+          9-axis IMU providing accelerometer, gyroscope, and magnetometer data.
+          Used to estimate the robot's tilt angle for the balance control loop.
+        </p>
+        <ul class="text-sm text-gray-500 space-y-1">
+          <li>3-axis gyroscope (±2000 dps)</li>
+          <li>3-axis accelerometer (±16 g)</li>
+          <li>3-axis magnetometer (±4900 µT)</li>
+          <li>Read via I²C, fused angle feeds balance loop</li>
+        </ul>
+      </div>
+
+      <!-- ToF -->
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <div class="flex items-start justify-between mb-3">
+          <h3 class="font-semibold text-orange-300">VL53L4CX Time-of-Flight (× 2) <span class="text-gray-600 font-normal text-xs">(Adafruit #5425)</span></h3>
+          <span class="text-xs text-gray-600 font-mono bg-gray-800 px-2 py-1 rounded">I²C</span>
+        </div>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+          Dual front-facing ToF ranging sensors for obstacle detection. Mounted at different
+          heights to detect both floor obstacles and objects at mid-body level.
+        </p>
+        <ul class="text-sm text-gray-500 space-y-1">
+          <li>Range: up to 6 m</li>
+          <li>940 nm invisible laser</li>
+          <li>Multi-target detection capability</li>
+          <li>I²C address offset via XSHUT pins</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Drive System -->
+  <section>
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+      <span class="text-orange-400">03</span> Drive System
+    </h2>
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <h3 class="font-semibold text-orange-300 mb-3">ODrive S1 (× 2)</h3>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+          Single-axis brushless motor controllers with integrated encoder support.
+          Communicate with Instinctus via CAN bus using the ODrive CAN protocol.
+        </p>
+        <ul class="text-sm text-gray-500 space-y-1">
+          <li>CAN bus · 250 kbps</li>
+          <li>Field-oriented control (FOC)</li>
+          <li>Velocity + torque modes</li>
+          <li>Onboard encoder interface</li>
+          <li>Up to 56 V / 40 A per axis</li>
+        </ul>
+      </div>
+
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <h3 class="font-semibold text-orange-300 mb-3">D5312S Motors (× 2)</h3>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+          High-torque brushless outrunner motors commonly used in drone and robotics
+          applications. Direct drive — no gearbox.
+        </p>
+        <ul class="text-sm text-gray-500 space-y-1">
+          <li>Stator: 53 mm diameter</li>
+          <li>KV rating: ~170 KV</li>
+          <li>Peak torque: ~1.5 N·m</li>
+          <li>Direct drive · no gearbox</li>
+        </ul>
+      </div>
+
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <h3 class="font-semibold text-orange-300 mb-3">CAN Bus</h3>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+          Both ODrive S1 controllers share a single CAN bus segment wired to the Teensy 4.1's
+          built-in FlexCAN peripheral.
+        </p>
+        <ul class="text-sm text-gray-500 space-y-1">
+          <li>Speed: 250 kbps</li>
+          <li>Topology: daisy-chain, 120 Ω terminator</li>
+          <li>Protocol: ODrive ASCII CAN</li>
+          <li>Node IDs: 0x01 (L), 0x02 (R)</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Cogitator hardware -->
+  <section>
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+      <span class="text-orange-400">04</span> Jetson Orin Nano (Cogitator)
+    </h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <h3 class="font-semibold text-orange-300 mb-3">Jetson Orin Nano Super 8 GB</h3>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+          NVIDIA's Orin Nano Super module. Provides 67 TOPS of AI performance in a compact
+          form factor — more than sufficient for vision inference, object detection, and future
+          LLM tasks.
+        </p>
+        <table class="w-full text-sm">
+          <tbody class="divide-y divide-gray-800">
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">CPU</td>
+              <td class="py-2 text-gray-300">6-core Arm Cortex-A78AE</td>
+            </tr>
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">GPU</td>
+              <td class="py-2 text-gray-300">1024-core Ampere · 32 Tensor cores</td>
+            </tr>
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">AI Perf</td>
+              <td class="py-2 text-gray-300">67 TOPS</td>
+            </tr>
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">RAM</td>
+              <td class="py-2 text-gray-300">8 GB LPDDR5 (shared CPU/GPU)</td>
+            </tr>
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">Storage</td>
+              <td class="py-2 text-gray-300">NVMe SSD via M.2</td>
+            </tr>
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">OS</td>
+              <td class="py-2 text-gray-300">JetPack 6.2 (Ubuntu 22.04 base)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <h3 class="font-semibold text-orange-300 mb-3">OAK-D Pro W Camera</h3>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+          Luxonis OAK-D Pro W is a wide-angle stereo depth camera with onboard DepthAI
+          inference acceleration. Connects to the Jetson via USB-C.
+        </p>
+        <ul class="text-sm text-gray-500 space-y-1.5">
+          <li>Stereo depth at up to 30 fps</li>
+          <li>Wide FOV RGB + mono stereo pair</li>
+          <li>Onboard MyriadX VPU for neural inference</li>
+          <li>Active dot projector (Pro) for low-light depth</li>
+          <li>USB 3.1 Gen 1 · DepthAI Python SDK</li>
+        </ul>
       </div>
     </div>
-  </footer>
+  </section>
 
-  <script>lucide.createIcons();</script>
-</body>
-</html>
+  <!-- Audio -->
+  <section>
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+      <span class="text-orange-400">05</span> Audio
+    </h2>
+    <div class="grid md:grid-cols-2 gap-6">
+
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <div class="flex items-start justify-between mb-3">
+          <h3 class="font-semibold text-orange-300">ReSpeaker 4-Mic Array</h3>
+          <span class="text-xs text-gray-600 font-mono bg-gray-800 px-2 py-1 rounded">USB</span>
+        </div>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+          Seeed Studio's circular 4-microphone array, designed for far-field voice capture.
+          Connects to the Jetson Orin Nano via USB and presents as a standard ALSA audio device.
+          Used for wake-word detection and voice command input.
+        </p>
+        <ul class="text-sm text-gray-500 space-y-1">
+          <li>4 × MEMS microphones in circular layout</li>
+          <li>Up to 5 m pickup range</li>
+          <li>Onboard AEC, beamforming &amp; noise suppression</li>
+          <li>12 programmable RGB LEDs (via USB HID)</li>
+          <li>USB Audio Class — no driver required on Linux</li>
+        </ul>
+      </div>
+
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <div class="flex items-start justify-between mb-3">
+          <h3 class="font-semibold text-orange-300">Visaton FR58 + MAX98357A <span class="text-gray-600 font-normal text-xs">(Adafruit #3006)</span></h3>
+          <span class="text-xs text-gray-600 font-mono bg-gray-800 px-2 py-1 rounded">I²S</span>
+        </div>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+          A Visaton FR 58 full-range driver (8 Ω) paired with the Adafruit MAX98357A I²S amplifier
+          breakout. The amp decodes I²S directly from the Jetson, requiring no
+          separate DAC. Output is mono, sufficient for voice synthesis and audio feedback.
+        </p>
+        <ul class="text-sm text-gray-500 space-y-1">
+          <li>Speaker: Visaton FR 58, 8 Ω, 2 W rated</li>
+          <li>Amp: MAX98357A · class D · up to 3.2 W @ 4 Ω</li>
+          <li>I²S input — BCLK, LRCLK, DIN from Jetson GPIO</li>
+          <li>Gain selectable via SD/MODE pin (6 / 9 / 12 / 15 dB)</li>
+          <li>No I²C address / no driver — PCM audio only</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+</main>

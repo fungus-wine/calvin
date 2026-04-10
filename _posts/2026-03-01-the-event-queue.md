@@ -1,5 +1,5 @@
 ---
-date: 2026-03-01T12:32
+date: 2026-03-01 12:32:00 -0500
 tag: Instinctus
 title: The Event Queue
 ---

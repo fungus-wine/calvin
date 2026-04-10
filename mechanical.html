@@ -1,312 +1,236 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mechanical – Calvin Robot</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-  <link rel="stylesheet" href="assets/css/custom.css">
-</head>
-<body class="bg-gray-950 text-gray-100 min-h-screen">
+---
+layout: page
+title: Mechanical
+permalink: /mechanical/
+---
 
-  <!-- Navigation -->
-  <nav class="bg-gray-900 border-b border-gray-800 sticky top-0 z-50">
-    <div class="max-w-5xl mx-auto px-6 py-3 flex items-center gap-8">
-      <a href="index.html" class="font-bold text-orange-400 text-lg tracking-tight">CALVIN</a>
-      <div class="flex gap-6 text-sm text-gray-300">
-        <a href="index.html" class="hover:text-orange-400 transition-colors">Home</a>
-        <a href="mechanical.html" class="nav-active">Mechanical</a>
-        <a href="hardware.html" class="hover:text-orange-400 transition-colors">Hardware</a>
-        <a href="software.html" class="hover:text-orange-400 transition-colors">Software</a>
-        <a href="gallery.html" class="hover:text-orange-400 transition-colors">Gallery</a>
-        <a href="build-log.html" class="hover:text-orange-400 transition-colors">Build Log</a>
-      </div>
-    </div>
-  </nav>
+{% include stub_notice.html %}
 
-  <!-- AI stub warning -->
-  <div class="max-w-5xl mx-auto px-6 pt-6">
-    <div class="bg-gray-900/40 border border-gray-800 rounded-xl px-4 py-3 text-gray-500 text-sm text-center">
-      AI-generated stub — much of the information on this site is incorrect or placeholder.
-    </div>
-  </div>
+<!-- Page header -->
+<header class="max-w-5xl mx-auto px-6 pt-14 pb-10">
+  <p class="text-orange-400 text-sm font-semibold tracking-widest uppercase mb-2">Documentation</p>
+  <h1 class="text-4xl font-bold mb-4">Mechanical Design</h1>
+  <p class="text-gray-400 text-lg max-w-2xl">
+    Calvin's physical structure — the chassis that holds everything together and the drive
+    system that keeps it moving.
+  </p>
+</header>
 
-  <!-- Page header -->
-  <header class="max-w-5xl mx-auto px-6 pt-14 pb-10">
-    <p class="text-orange-400 text-sm font-semibold tracking-widest uppercase mb-2">Documentation</p>
-    <h1 class="text-4xl font-bold mb-4">Mechanical Design</h1>
-    <p class="text-gray-400 text-lg max-w-2xl">
-      Calvin's physical structure — the chassis that holds everything together and the drive
-      system that keeps it moving.
-    </p>
-  </header>
+<main class="max-w-5xl mx-auto px-6 pb-20 space-y-16">
 
-  <main class="max-w-5xl mx-auto px-6 pb-20 space-y-16">
+  <!-- Chassis -->
+  <section>
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+      <span class="text-orange-400">01</span> Chassis
+    </h2>
+    <div class="grid md:grid-cols-2 gap-6">
 
-    <!-- Chassis -->
-    <section>
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-        <span class="text-orange-400">01</span> Chassis
-      </h2>
-      <div class="grid md:grid-cols-2 gap-6">
-
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <h3 class="font-semibold text-orange-300 mb-3">Structure</h3>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            Calvin's chassis is a rectangular box frame built with 20x20mm aluminum extrusions. There is a fixed, solid 10mm axle attached to the bottom of the frame for the free-spinning wheels. 3D printed attachment brackets and panels comprise the non-structural parts that hold the electrical and mechanical hardware in place. The layout keeps the center of mass as high as possible to make balancing easier.
-          </p>
-          <ul class="text-sm text-gray-500 space-y-1.5">
-            <li>Two-wheeled self-balancing form factor</li>
-            <li>Vertical electronics stack — Jetson on bottom, GIGA R1 mid, battery high</li>
-            <li>Motor mounts integrated into the side panels</li>
-            <li>Removable front, side, top, and bottom panels</li>
-          </ul>
-        </div>
-
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <h3 class="font-semibold text-orange-300 mb-3">Key Dimensions</h3>
-          <table class="w-full text-sm">
-            <tbody class="divide-y divide-gray-800">
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">Frame</td>
-                <td class="py-2 text-gray-300">240mm W x 190mm H x 150mm D</td>
-              </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">Wheels</td>
-                <td class="py-2 text-gray-300">xxxmm Diameter, xxmm wide</td>
-              </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">Weight</td>
-                <td class="py-2 text-gray-300">No idea. About 5-7 pounds total weight?</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-      </div>
-
-      <!-- Electronics layout -->
-      <div class="mt-6 bg-gray-900 border border-gray-800 rounded-xl p-6">
-        <h3 class="font-semibold text-orange-300 mb-4">Electronics Layout</h3>
-        <div class="grid md:grid-cols-3 gap-4 text-sm">
-
-          <div class="border border-gray-700/50 rounded-lg p-4">
-            <div class="text-gray-500 font-mono text-xs uppercase mb-2">Instinctus</div>
-            <div class="text-gray-300 font-medium mb-1">Teensy 4.1</div>
-            <div class="text-gray-500 text-xs">Mounted to front of frame out of the way of the motors and Jetson.</div>
-          </div>
-          <div class="border border-gray-700/50 rounded-lg p-4">
-            <div class="text-gray-500 font-mono text-xs uppercase mb-2">Instinctus</div>
-            <div class="text-gray-300 font-medium mb-1">ToF sensors</div>
-            <div class="text-gray-500 text-xs">Mounted low on the frame, facing forward and rear.</div>
-          </div>
-          <div class="border border-gray-700/50 rounded-lg p-4">
-            <div class="text-gray-500 font-mono text-xs uppercase mb-2">Instinctus</div>
-            <div class="text-gray-300 font-medium mb-1">Balance IMU</div>
-            <div class="text-gray-500 text-xs">Mounted just above the axle, as close to to the center of the axle as possible.</div>
-          </div>
-          
-          <div class="border border-gray-700/50 rounded-lg p-4">
-            <div class="text-gray-500 font-mono text-xs uppercase mb-2">Instinctus</div>
-            <div class="text-gray-300 font-medium mb-1">ODrive S1 Motor Drivers</div>
-            <div class="text-gray-500 text-xs">Mounted on bracket at top of the chassis frame</div>
-          </div>
-          <div class="border border-gray-700/50 rounded-lg p-4">
-            <div class="text-gray-500 font-mono text-xs uppercase mb-2">Cogitator</div>
-            <div class="text-gray-300 font-medium mb-1">Seeed Studio ReSpeaker 4 Mic Array</div>
-            <div class="text-gray-500 text-xs">Mounted above the chassis frame, with clear view of sound.</div>
-          </div>
-          <div class="border border-gray-700/50 rounded-lg p-4">
-            <div class="text-gray-500 font-mono text-xs uppercase mb-2">Cogitator</div>
-            <div class="text-gray-300 font-medium mb-1">Jetson Orin Nano</div>
-            <div class="text-gray-500 text-xs">Mounted low, just above axle.</div>
-          </div>
-
-          <div class="border border-gray-700/50 rounded-lg p-4">
-            <div class="text-gray-500 font-mono text-xs uppercase mb-2">Cogitator</div>
-            <div class="text-gray-300 font-medium mb-1">Visaton FR 58 Speaker & Amplifier</div>
-            <div class="text-gray-500 text-xs">Mounted above the chassis frame to raise center of gravity.</div>
-          </div>
-          <div class="border border-gray-700/50 rounded-lg p-4">
-            <div class="text-gray-500 font-mono text-xs uppercase mb-2">Cogitator</div>
-            <div class="text-gray-300 font-medium mb-1">OAK-D Pro W Camera</div>
-            <div class="text-gray-500 text-xs">Mounted on vibration isolators above chassis frame.</div>
-          </div>
-          <div class="border border-gray-700/50 rounded-lg p-4">
-            <div class="text-gray-500 font-mono text-xs uppercase mb-2">Cogitator</div>
-            <div class="text-gray-300 font-medium mb-1">S3s LiPo Battery</div>
-            <div class="text-gray-500 text-xs">Mounted above the chassis frame to raise center of gravity.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Drive System -->
-    <section>
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-        <span class="text-orange-400">02</span> Drive System
-      </h2>
-      <div class="grid md:grid-cols-3 gap-6">
-
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <h3 class="font-semibold text-orange-300 mb-3">Motors</h3>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            ODrive D5312S brushless outrunner motors. Connected to wheels by 2GT belts with 8:1 reduction. 
-          </p>
-          <ul class="text-sm text-gray-500 space-y-1.5">
-            <li>53 mm stator diameter</li>
-            <li>~170 KV rating</li>
-            <li>Peak torque ~1.5 N·m</li>
-            <li>Belt drive</li>
-            <li>One per side, mirrored mount</li>
-          </ul>
-        </div>
-
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <h3 class="font-semibold text-orange-300 mb-3">Wheels</h3>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            Wheels mount directly to pulleys. The wheel assembly rotates on bearings around the fixed axle.
-            Tires are 3D printed Varioshore TPU printed at 210 C for optimal friction coefficient.
-          </p>
-          <ul class="text-sm text-gray-500 space-y-1.5">
-            <li>Free rotation on solid axle</li>
-            <li>3D Printed Varioshore with grid infill for compliance</li>
-            <li>V-tread design</li>
-          </ul>
-        </div>
-
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <h3 class="font-semibold text-orange-300 mb-3">Motor Controllers</h3>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            Each motor is driven by a dedicated ODrive S1 single-axis brushless controller.
-            The ODrives accept high-level velocity setpoints from the Teensy 4.1 over CAN bus.
-          </p>
-          <ul class="text-sm text-gray-500 space-y-1.5">
-            <li>ODrive S1 × 2</li>
-            <li>PID tuning for smoothness and control</li>
-            <li>Velocity control mode</li>
-            <li>CAN bus · 250 kbps</li>
-            <li>Up to 56 V / 40 A per controller</li>
-          </ul>
-        </div>
-
-      </div>
-
-      <!-- Drive topology callout -->
-      <div class="mt-6 bg-gray-900/40 border border-gray-800 rounded-xl p-6">
-        <h3 class="font-semibold text-orange-300 mb-3">Drive System Design Note</h3>
-        <p class="text-gray-400 text-sm leading-relaxed max-w-3xl">
-          The ODrive S1s are overkill. Preliminary calculations predicted a motor current of about 4-5 amps, which is just outside the smaller ODrive Micro's capability, so I went with the more robust S1 drivers to be safe.
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <h3 class="font-semibold text-orange-300 mb-3">Structure</h3>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+          Calvin's chassis is a rectangular box frame built with 20x20mm aluminum extrusions. There is a fixed, solid 10mm axle attached to the bottom of the frame for the free-spinning wheels. 3D printed attachment brackets and panels comprise the non-structural parts that hold the electrical and mechanical hardware in place. The layout keeps the center of mass as high as possible to make balancing easier.
         </p>
+        <ul class="text-sm text-gray-500 space-y-1.5">
+          <li>Two-wheeled self-balancing form factor</li>
+          <li>Vertical electronics stack — Jetson on bottom, GIGA R1 mid, battery high</li>
+          <li>Motor mounts integrated into the side panels</li>
+          <li>Removable front, side, top, and bottom panels</li>
+        </ul>
       </div>
-    </section>
 
-    <!-- Power -->
-    <section>
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-        <span class="text-orange-400">03</span> Power
-      </h2>
-      <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <h3 class="font-semibold text-orange-300 mb-3">Key Dimensions</h3>
+        <table class="w-full text-sm">
+          <tbody class="divide-y divide-gray-800">
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">Frame</td>
+              <td class="py-2 text-gray-300">240mm W x 190mm H x 150mm D</td>
+            </tr>
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">Wheels</td>
+              <td class="py-2 text-gray-300">xxxmm Diameter, xxmm wide</td>
+            </tr>
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">Weight</td>
+              <td class="py-2 text-gray-300">No idea. About 5-7 pounds total weight?</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <h3 class="font-semibold text-orange-300 mb-3">Battery</h3>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            Calvin runs on a 3S 11.1V LiPo RC battery pack.
-          </p>
-          <table class="w-full text-sm">
-            <tbody class="divide-y divide-gray-800">
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">Chemistry</td>
-                <td class="py-2 text-gray-300">LiPo</td>
-              </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">Nominal voltage</td>
-                <td class="py-2 text-gray-300">3S · 11.1 V</td>
-              </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">Capacity</td>
-                <td class="py-2 text-gray-300">58.83 Wh (5.3 Ahr)</td>
-              </tr>
+    </div>
 
-            </tbody>
-          </table>
+    <!-- Electronics layout -->
+    <div class="mt-6 bg-gray-900 border border-gray-800 rounded-xl p-6">
+      <h3 class="font-semibold text-orange-300 mb-4">Electronics Layout</h3>
+      <div class="grid md:grid-cols-3 gap-4 text-sm">
+
+        <div class="border border-gray-700/50 rounded-lg p-4">
+          <div class="text-gray-500 font-mono text-xs uppercase mb-2">Instinctus</div>
+          <div class="text-gray-300 font-medium mb-1">Teensy 4.1</div>
+          <div class="text-gray-500 text-xs">Mounted to front of frame out of the way of the motors and Jetson.</div>
+        </div>
+        <div class="border border-gray-700/50 rounded-lg p-4">
+          <div class="text-gray-500 font-mono text-xs uppercase mb-2">Instinctus</div>
+          <div class="text-gray-300 font-medium mb-1">ToF sensors</div>
+          <div class="text-gray-500 text-xs">Mounted low on the frame, facing forward and rear.</div>
+        </div>
+        <div class="border border-gray-700/50 rounded-lg p-4">
+          <div class="text-gray-500 font-mono text-xs uppercase mb-2">Instinctus</div>
+          <div class="text-gray-300 font-medium mb-1">Balance IMU</div>
+          <div class="text-gray-500 text-xs">Mounted just above the axle, as close to to the center of the axle as possible.</div>
         </div>
 
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <h3 class="font-semibold text-orange-300 mb-3">Power Distribution</h3>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            The battery feeds the ODrive S1 controllers directly at pack voltage. Lower-voltage
-            rails for the Teensy 4.1 and Jetson Orin Nano are derived via dedicated BEC /
-            DC-DC converters to isolate logic power from the noisy motor supply. 
-          </p>
-          <ul class="text-sm text-gray-500 space-y-2">
-            <li class="flex gap-3">
-              <span class="text-orange-400 font-mono text-xs w-16 shrink-0 pt-0.5">Motor rail</span>
-              <span>Battery voltage direct to both ODrive S1 controllers</span>
-            </li>
-            <li class="flex gap-3 pt-2 border-t border-gray-800">
-              <span class="text-orange-400 font-mono text-xs w-16 shrink-0 pt-0.5">5 V logic</span>
-              <span>Buck converter step-down for Teensy 4.1 and peripheral sensors</span>
-            </li>
-            <li class="flex gap-3 pt-2 border-t border-gray-800">
-              <span class="text-orange-400 font-mono text-xs w-16 shrink-0 pt-0.5">Jetson</span>
-              <span>Buck converter step-down for Jetson and peripheral devices</span>
-            </li>
-          </ul>
+        <div class="border border-gray-700/50 rounded-lg p-4">
+          <div class="text-gray-500 font-mono text-xs uppercase mb-2">Instinctus</div>
+          <div class="text-gray-300 font-medium mb-1">ODrive S1 Motor Drivers</div>
+          <div class="text-gray-500 text-xs">Mounted on bracket at top of the chassis frame</div>
+        </div>
+        <div class="border border-gray-700/50 rounded-lg p-4">
+          <div class="text-gray-500 font-mono text-xs uppercase mb-2">Cogitator</div>
+          <div class="text-gray-300 font-medium mb-1">Seeed Studio ReSpeaker 4 Mic Array</div>
+          <div class="text-gray-500 text-xs">Mounted above the chassis frame, with clear view of sound.</div>
+        </div>
+        <div class="border border-gray-700/50 rounded-lg p-4">
+          <div class="text-gray-500 font-mono text-xs uppercase mb-2">Cogitator</div>
+          <div class="text-gray-300 font-medium mb-1">Jetson Orin Nano</div>
+          <div class="text-gray-500 text-xs">Mounted low, just above axle.</div>
         </div>
 
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Footer -->
-  <footer class="bg-gray-900 border-t border-gray-800">
-    <div class="max-w-5xl mx-auto px-6 py-12">
-      <h2 class="text-xl font-bold mb-6 text-gray-300">Explore the documentation</h2>
-      <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-        <a href="mechanical.html"
-           class="bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg p-4 transition-colors text-center">
-          <i data-lucide="wrench" class="w-6 h-6 mx-auto mb-2 text-orange-400"></i>
-          <div class="font-semibold text-sm">Mechanical</div>
-          <div class="text-xs text-gray-500 mt-1">Frame &amp; chassis</div>
-        </a>
-        <a href="hardware.html"
-           class="bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg p-4 transition-colors text-center">
-          <i data-lucide="cpu" class="w-6 h-6 mx-auto mb-2 text-orange-400"></i>
-          <div class="font-semibold text-sm">Hardware</div>
-          <div class="text-xs text-gray-500 mt-1">Specs &amp; components</div>
-        </a>
-        <a href="software.html"
-           class="bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg p-4 transition-colors text-center">
-          <i data-lucide="code-2" class="w-6 h-6 mx-auto mb-2 text-orange-400"></i>
-          <div class="font-semibold text-sm">Software</div>
-          <div class="text-xs text-gray-500 mt-1">Architecture &amp; code</div>
-        </a>
-        <a href="gallery.html"
-           class="bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg p-4 transition-colors text-center">
-          <i data-lucide="camera" class="w-6 h-6 mx-auto mb-2 text-orange-400"></i>
-          <div class="font-semibold text-sm">Gallery</div>
-          <div class="text-xs text-gray-500 mt-1">Photos &amp; videos</div>
-        </a>
-        <a href="build-log.html"
-           class="bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg p-4 transition-colors text-center">
-          <i data-lucide="scroll-text" class="w-6 h-6 mx-auto mb-2 text-orange-400"></i>
-          <div class="font-semibold text-sm">Build Log</div>
-          <div class="text-xs text-gray-500 mt-1">Progress updates</div>
-        </a>
+        <div class="border border-gray-700/50 rounded-lg p-4">
+          <div class="text-gray-500 font-mono text-xs uppercase mb-2">Cogitator</div>
+          <div class="text-gray-300 font-medium mb-1">Visaton FR 58 Speaker &amp; Amplifier</div>
+          <div class="text-gray-500 text-xs">Mounted above the chassis frame to raise center of gravity.</div>
+        </div>
+        <div class="border border-gray-700/50 rounded-lg p-4">
+          <div class="text-gray-500 font-mono text-xs uppercase mb-2">Cogitator</div>
+          <div class="text-gray-300 font-medium mb-1">OAK-D Pro W Camera</div>
+          <div class="text-gray-500 text-xs">Mounted on vibration isolators above chassis frame.</div>
+        </div>
+        <div class="border border-gray-700/50 rounded-lg p-4">
+          <div class="text-gray-500 font-mono text-xs uppercase mb-2">Cogitator</div>
+          <div class="text-gray-300 font-medium mb-1">S3s LiPo Battery</div>
+          <div class="text-gray-500 text-xs">Mounted above the chassis frame to raise center of gravity.</div>
+        </div>
       </div>
     </div>
-    <div class="border-t border-gray-800 py-6 text-center text-gray-600 text-sm">
-      <div class="max-w-5xl mx-auto px-6">
-        Calvin Robot Project &nbsp;·&nbsp;
-        <a href="https://github.com/fungus-wine" target="_blank" rel="noopener"
-           class="hover:text-gray-400 transition-colors">GitHub</a>
-      </div>
-    </div>
-  </footer>
+  </section>
 
-  <script>lucide.createIcons();</script>
-</body>
-</html>
+  <!-- Drive System -->
+  <section>
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+      <span class="text-orange-400">02</span> Drive System
+    </h2>
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <h3 class="font-semibold text-orange-300 mb-3">Motors</h3>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+          ODrive D5312S brushless outrunner motors. Connected to wheels by 2GT belts with 8:1 reduction.
+        </p>
+        <ul class="text-sm text-gray-500 space-y-1.5">
+          <li>53 mm stator diameter</li>
+          <li>~170 KV rating</li>
+          <li>Peak torque ~1.5 N·m</li>
+          <li>Belt drive</li>
+          <li>One per side, mirrored mount</li>
+        </ul>
+      </div>
+
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <h3 class="font-semibold text-orange-300 mb-3">Wheels</h3>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+          Wheels mount directly to pulleys. The wheel assembly rotates on bearings around the fixed axle.
+          Tires are 3D printed Varioshore TPU printed at 210 C for optimal friction coefficient.
+        </p>
+        <ul class="text-sm text-gray-500 space-y-1.5">
+          <li>Free rotation on solid axle</li>
+          <li>3D Printed Varioshore with grid infill for compliance</li>
+          <li>V-tread design</li>
+        </ul>
+      </div>
+
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <h3 class="font-semibold text-orange-300 mb-3">Motor Controllers</h3>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+          Each motor is driven by a dedicated ODrive S1 single-axis brushless controller.
+          The ODrives accept high-level velocity setpoints from the Teensy 4.1 over CAN bus.
+        </p>
+        <ul class="text-sm text-gray-500 space-y-1.5">
+          <li>ODrive S1 × 2</li>
+          <li>PID tuning for smoothness and control</li>
+          <li>Velocity control mode</li>
+          <li>CAN bus · 250 kbps</li>
+          <li>Up to 56 V / 40 A per controller</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Drive topology callout -->
+    <div class="mt-6 bg-gray-900/40 border border-gray-800 rounded-xl p-6">
+      <h3 class="font-semibold text-orange-300 mb-3">Drive System Design Note</h3>
+      <p class="text-gray-400 text-sm leading-relaxed max-w-3xl">
+        The ODrive S1s are overkill. Preliminary calculations predicted a motor current of about 4-5 amps, which is just outside the smaller ODrive Micro's capability, so I went with the more robust S1 drivers to be safe.
+      </p>
+    </div>
+  </section>
+
+  <!-- Power -->
+  <section>
+    <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+      <span class="text-orange-400">03</span> Power
+    </h2>
+    <div class="grid md:grid-cols-2 gap-6">
+
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <h3 class="font-semibold text-orange-300 mb-3">Battery</h3>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+          Calvin runs on a 3S 11.1V LiPo RC battery pack.
+        </p>
+        <table class="w-full text-sm">
+          <tbody class="divide-y divide-gray-800">
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">Chemistry</td>
+              <td class="py-2 text-gray-300">LiPo</td>
+            </tr>
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">Nominal voltage</td>
+              <td class="py-2 text-gray-300">3S · 11.1 V</td>
+            </tr>
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">Capacity</td>
+              <td class="py-2 text-gray-300">58.83 Wh (5.3 Ahr)</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <h3 class="font-semibold text-orange-300 mb-3">Power Distribution</h3>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+          The battery feeds the ODrive S1 controllers directly at pack voltage. Lower-voltage
+          rails for the Teensy 4.1 and Jetson Orin Nano are derived via dedicated BEC /
+          DC-DC converters to isolate logic power from the noisy motor supply.
+        </p>
+        <ul class="text-sm text-gray-500 space-y-2">
+          <li class="flex gap-3">
+            <span class="text-orange-400 font-mono text-xs w-16 shrink-0 pt-0.5">Motor rail</span>
+            <span>Battery voltage direct to both ODrive S1 controllers</span>
+          </li>
+          <li class="flex gap-3 pt-2 border-t border-gray-800">
+            <span class="text-orange-400 font-mono text-xs w-16 shrink-0 pt-0.5">5 V logic</span>
+            <span>Buck converter step-down for Teensy 4.1 and peripheral sensors</span>
+          </li>
+          <li class="flex gap-3 pt-2 border-t border-gray-800">
+            <span class="text-orange-400 font-mono text-xs w-16 shrink-0 pt-0.5">Jetson</span>
+            <span>Buck converter step-down for Jetson and peripheral devices</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+</main>

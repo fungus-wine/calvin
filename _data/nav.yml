@@ -1,0 +1,30 @@
+# Primary navigation — used by header nav and (with extra fields) footer cards.
+# `match` is the path prefix used to determine the active link.
+- href: /
+  label: Home
+  match: /
+- href: /mechanical/
+  label: Mechanical
+  match: /mechanical/
+  icon: wrench
+  subtitle: Frame &amp; chassis
+- href: /hardware/
+  label: Hardware
+  match: /hardware/
+  icon: cpu
+  subtitle: Specs &amp; components
+- href: /software/
+  label: Software
+  match: /software/
+  icon: code-2
+  subtitle: Architecture &amp; code
+- href: /gallery/
+  label: Gallery
+  match: /gallery/
+  icon: camera
+  subtitle: Photos &amp; videos
+- href: /build-log/
+  label: Build Log
+  match: /build-log/
+  icon: scroll-text
+  subtitle: Progress updates

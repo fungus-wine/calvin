@@ -1,5 +1,5 @@
 ---
-date: 2026-03-02T09:30
+date: 2026-03-02 09:30:00 -0500
 tag: Instinctus
 title: RIP Arduino
 ---

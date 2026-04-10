@@ -1,477 +1,405 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Software – Calvin Robot</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-  <link rel="stylesheet" href="assets/css/custom.css">
-</head>
-<body class="bg-gray-950 text-gray-100 min-h-screen">
+---
+layout: page
+title: Software
+permalink: /software/
+---
 
-  <!-- Navigation -->
-  <nav class="bg-gray-900 border-b border-gray-800 sticky top-0 z-50">
-    <div class="max-w-5xl mx-auto px-6 py-3 flex items-center gap-8">
-      <a href="index.html" class="font-bold text-orange-400 text-lg tracking-tight">CALVIN</a>
-      <div class="flex gap-6 text-sm text-gray-300">
-        <a href="index.html" class="hover:text-orange-400 transition-colors">Home</a>
-        <a href="mechanical.html" class="hover:text-orange-400 transition-colors">Mechanical</a>
-        <a href="hardware.html" class="hover:text-orange-400 transition-colors">Hardware</a>
-        <a href="software.html" class="nav-active">Software</a>
-        <a href="gallery.html" class="hover:text-orange-400 transition-colors">Gallery</a>
-        <a href="build-log.html" class="hover:text-orange-400 transition-colors">Build Log</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- AI stub warning -->
-  <div class="max-w-5xl mx-auto px-6 pt-6">
-    <div class="bg-gray-900/40 border border-gray-800 rounded-xl px-4 py-3 text-gray-500 text-sm text-center">
-      This is a project planning and overview page. For progress updates, check the <a href="build-log.html"class="text-orange-400 hover:text-orange-300 transition-colors">build log</a>.
-    </div>
+<!-- AI stub warning -->
+<div class="max-w-5xl mx-auto px-6 pt-6">
+  <div class="bg-gray-900/40 border border-gray-800 rounded-xl px-4 py-3 text-gray-500 text-sm text-center">
+    This is a project planning and overview page. For progress updates, check the <a href="{{ '/build-log/' | relative_url }}" class="text-orange-400 hover:text-orange-300 transition-colors">build log</a>.
   </div>
+</div>
 
-  <!-- Page header -->
-  <header class="max-w-5xl mx-auto px-6 pt-14 pb-10">
-    <p class="text-orange-400 text-sm font-semibold tracking-widest uppercase mb-2">Documentation</p>
-    <h1 class="text-4xl font-bold mb-4">Software Architecture</h1>
-    <p class="text-gray-400 text-lg max-w-2xl">
-      Calvin's software is split across three purpose-built systems that communicate in a chain: Explorator ↔ Cogitator ↔ Instinctus.
+<!-- Page header -->
+<header class="max-w-5xl mx-auto px-6 pt-14 pb-10">
+  <p class="text-orange-400 text-sm font-semibold tracking-widest uppercase mb-2">Documentation</p>
+  <h1 class="text-4xl font-bold mb-4">Software Architecture</h1>
+  <p class="text-gray-400 text-lg max-w-2xl">
+    Calvin's software is split across three purpose-built systems that communicate in a chain: Explorator ↔ Cogitator ↔ Instinctus.
+  </p>
+</header>
+
+<main class="max-w-5xl mx-auto px-6 pb-20 space-y-16">
+
+  <!-- Data flow diagram -->
+  <section>
+    <h2 class="text-2xl font-bold mb-6">System Data Flow</h2>
+    <div class="bg-gray-900/40 border border-gray-800 rounded-2xl p-6 md:p-10">
+      <div class="flex flex-col items-stretch gap-0 max-w-xl mx-auto">
+
+        <!-- EXPLORATOR -->
+        <div class="rounded-xl border border-indigo-500/30 bg-indigo-500/5 overflow-hidden">
+          <div class="flex items-center justify-between px-5 py-3 border-b border-indigo-500/20">
+            <span class="font-mono font-bold tracking-widest text-indigo-300 text-xs uppercase">Explorator</span>
+            <span class="text-xs text-gray-500 font-mono">Electron + Vue 3</span>
+          </div>
+          <div class="px-5 py-4">
+            <p class="text-xs text-gray-500 leading-relaxed">Human workstation &nbsp;·&nbsp; Telemetry display &nbsp;·&nbsp; Audio &amp; video feeds &nbsp;·&nbsp; Manual controls &nbsp;·&nbsp; PID tuning</p>
+          </div>
+        </div>
+
+        <!-- Connector: WebSocket -->
+        <div class="flex flex-col items-center py-3 gap-1">
+          <div class="w-px h-3 bg-gray-700"></div>
+          <span class="font-mono text-xs text-gray-600 border border-gray-700/50 rounded-full bg-gray-950 px-3 py-0.5">TCP / WebSocket &nbsp;·&nbsp; LAN / WiFi</span>
+          <div class="w-px h-3 bg-gray-700"></div>
+          <span class="text-gray-600 leading-none text-sm">▾</span>
+        </div>
+
+        <!-- COGITATOR -->
+        <div class="rounded-xl border border-emerald-500/30 bg-emerald-500/5 overflow-hidden">
+          <div class="flex items-center justify-between px-5 py-3 border-b border-emerald-500/20">
+            <span class="font-mono font-bold tracking-widest text-emerald-300 text-xs uppercase">Cogitator</span>
+            <span class="text-xs text-gray-500 font-mono">Python &nbsp;·&nbsp; Jetson Orin Nano</span>
+          </div>
+          <div class="px-5 py-4">
+            <p class="text-xs text-gray-500 leading-relaxed">Vision service (OAK-D Pro W) &nbsp;·&nbsp; LLM processing <span class="text-orange-400/50">(planned)</span> &nbsp;·&nbsp; Telemetry relay &nbsp;·&nbsp; WebSocket gateway</p>
+          </div>
+        </div>
+
+        <!-- Connector: Serial -->
+        <div class="flex flex-col items-center py-3 gap-1">
+          <div class="w-px h-3 bg-gray-700"></div>
+          <span class="font-mono text-xs text-gray-600 border border-gray-700/50 rounded-full bg-gray-950 px-3 py-0.5">1 MBPS Serial</span>
+          <div class="w-px h-3 bg-gray-700"></div>
+          <span class="text-gray-600 leading-none text-sm">▾</span>
+        </div>
+
+        <!-- INSTINCTUS -->
+        <div class="rounded-xl border border-orange-500/30 bg-orange-500/5 overflow-hidden">
+          <div class="flex items-center justify-between px-5 py-3 border-b border-orange-500/20">
+            <span class="font-mono font-bold tracking-widest text-orange-300 text-xs uppercase">Instinctus</span>
+            <span class="text-xs text-gray-500 font-mono">Teensy 4.1</span>
+          </div>
+          <div class="px-5 py-4">
+            <div class="text-orange-400/50 font-mono text-xs mb-1.5">ARM Cortex-M7 · 600 MHz</div>
+            <p class="text-xs text-gray-500 leading-relaxed">Sensor reads &nbsp;·&nbsp; Serial bridge &nbsp;·&nbsp; PID balance loop &nbsp;·&nbsp; ODrive CAN commands</p>
+          </div>
+        </div>
+
+        <!-- Connector: CAN bus branch to ODrives -->
+        <div class="flex flex-col items-center pt-3 pb-1 gap-1">
+          <div class="w-px h-3 bg-gray-700"></div>
+          <span class="font-mono text-xs text-gray-600 border border-gray-700/50 rounded-full bg-gray-950 px-3 py-0.5">CAN Bus</span>
+          <div class="w-px h-3 bg-gray-700"></div>
+          <span class="text-gray-600 leading-none text-sm">▾</span>
+        </div>
+
+        <!-- ODrives -->
+        <div class="grid grid-cols-2 gap-3">
+          <div class="rounded-xl border border-gray-700/50 bg-gray-900/50 px-4 py-4 text-center">
+            <div class="text-gray-600 font-mono text-xs mb-1">ODrive S1</div>
+            <div class="text-gray-300 text-sm font-medium">Left Motor</div>
+          </div>
+          <div class="rounded-xl border border-gray-700/50 bg-gray-900/50 px-4 py-4 text-center">
+            <div class="text-gray-600 font-mono text-xs mb-1">ODrive S1</div>
+            <div class="text-gray-300 text-sm font-medium">Right Motor</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Instinctus -->
+  <section>
+    <h2 class="text-2xl font-bold mb-2 flex items-center gap-3">
+      <span class="text-orange-400">01</span> Instinctus
+    </h2>
+    <p class="text-gray-500 text-sm mb-6">
+      <a href="https://github.com/fungus-wine/calvin_instinctus" target="_blank" rel="noopener"
+         class="text-orange-400 hover:text-orange-300 transition-colors">
+        github.com/fungus-wine/calvin_instinctus
+      </a>
     </p>
-  </header>
-
-  <main class="max-w-5xl mx-auto px-6 pb-20 space-y-16">
-
-    <!-- Data flow diagram -->
-    <section>
-      <h2 class="text-2xl font-bold mb-6">System Data Flow</h2>
-      <div class="bg-gray-900/40 border border-gray-800 rounded-2xl p-6 md:p-10">
-        <div class="flex flex-col items-stretch gap-0 max-w-xl mx-auto">
-
-          <!-- EXPLORATOR -->
-          <div class="rounded-xl border border-indigo-500/30 bg-indigo-500/5 overflow-hidden">
-            <div class="flex items-center justify-between px-5 py-3 border-b border-indigo-500/20">
-              <span class="font-mono font-bold tracking-widest text-indigo-300 text-xs uppercase">Explorator</span>
-              <span class="text-xs text-gray-500 font-mono">Electron + Vue 3</span>
-            </div>
-            <div class="px-5 py-4">
-              <p class="text-xs text-gray-500 leading-relaxed">Human workstation &nbsp;·&nbsp; Telemetry display &nbsp;·&nbsp; Audio & video feeds &nbsp;·&nbsp; Manual controls &nbsp;·&nbsp; PID tuning</p>
-            </div>
-          </div>
-
-          <!-- Connector: WebSocket -->
-          <div class="flex flex-col items-center py-3 gap-1">
-            <div class="w-px h-3 bg-gray-700"></div>
-            <span class="font-mono text-xs text-gray-600 border border-gray-700/50 rounded-full bg-gray-950 px-3 py-0.5">TCP / WebSocket &nbsp;·&nbsp; LAN / WiFi</span>
-            <div class="w-px h-3 bg-gray-700"></div>
-            <span class="text-gray-600 leading-none text-sm">▾</span>
-          </div>
-
-          <!-- COGITATOR -->
-          <div class="rounded-xl border border-emerald-500/30 bg-emerald-500/5 overflow-hidden">
-            <div class="flex items-center justify-between px-5 py-3 border-b border-emerald-500/20">
-              <span class="font-mono font-bold tracking-widest text-emerald-300 text-xs uppercase">Cogitator</span>
-              <span class="text-xs text-gray-500 font-mono">Python &nbsp;·&nbsp; Jetson Orin Nano</span>
-            </div>
-            <div class="px-5 py-4">
-              <p class="text-xs text-gray-500 leading-relaxed">Vision service (OAK-D Pro W) &nbsp;·&nbsp; LLM processing <span class="text-orange-400/50">(planned)</span> &nbsp;·&nbsp; Telemetry relay &nbsp;·&nbsp; WebSocket gateway</p>
-            </div>
-          </div>
-
-          <!-- Connector: Serial -->
-          <div class="flex flex-col items-center py-3 gap-1">
-            <div class="w-px h-3 bg-gray-700"></div>
-            <span class="font-mono text-xs text-gray-600 border border-gray-700/50 rounded-full bg-gray-950 px-3 py-0.5">1 MBPS Serial</span>
-            <div class="w-px h-3 bg-gray-700"></div>
-            <span class="text-gray-600 leading-none text-sm">▾</span>
-          </div>
-
-          <!-- INSTINCTUS -->
-          <div class="rounded-xl border border-orange-500/30 bg-orange-500/5 overflow-hidden">
-            <div class="flex items-center justify-between px-5 py-3 border-b border-orange-500/20">
-              <span class="font-mono font-bold tracking-widest text-orange-300 text-xs uppercase">Instinctus</span>
-              <span class="text-xs text-gray-500 font-mono">Teensy 4.1</span>
-            </div>
-            <div class="px-5 py-4">
-              <div class="text-orange-400/50 font-mono text-xs mb-1.5">ARM Cortex-M7 · 600 MHz</div>
-              <p class="text-xs text-gray-500 leading-relaxed">Sensor reads &nbsp;·&nbsp; Serial bridge &nbsp;·&nbsp; PID balance loop &nbsp;·&nbsp; ODrive CAN commands</p>
-            </div>
-          </div>
-
-          <!-- Connector: CAN bus branch to ODrives -->
-          <div class="flex flex-col items-center pt-3 pb-1 gap-1">
-            <div class="w-px h-3 bg-gray-700"></div>
-            <span class="font-mono text-xs text-gray-600 border border-gray-700/50 rounded-full bg-gray-950 px-3 py-0.5">CAN Bus</span>
-            <div class="w-px h-3 bg-gray-700"></div>
-            <span class="text-gray-600 leading-none text-sm">▾</span>
-          </div>
-
-          <!-- ODrives -->
-          <div class="grid grid-cols-2 gap-3">
-            <div class="rounded-xl border border-gray-700/50 bg-gray-900/50 px-4 py-4 text-center">
-              <div class="text-gray-600 font-mono text-xs mb-1">ODrive S1</div>
-              <div class="text-gray-300 text-sm font-medium">Left Motor</div>
-            </div>
-            <div class="rounded-xl border border-gray-700/50 bg-gray-900/50 px-4 py-4 text-center">
-              <div class="text-gray-600 font-mono text-xs mb-1">ODrive S1</div>
-              <div class="text-gray-300 text-sm font-medium">Right Motor</div>
-            </div>
-          </div>
-
-        </div>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <h3 class="font-semibold text-orange-300 mb-3">Single-Core Architecture</h3>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+          The Teensy 4.1's ARM Cortex-M7 runs at 600 MHz and handles all Instinctus tasks
+          on a single core — sensor reads, serial comms, the PID balance loop, and CAN bus
+          motor commands.
+        </p>
+        <ul class="text-sm text-gray-500 space-y-1.5">
+          <li>Reads ICM-20948 IMU via SPI</li>
+          <li>Reads VL53L4CX ToF sensors on a I2C bus</li>
+          <li>Receives commands from Cogitator over serial</li>
+          <li>Runs PID controller (1 kHz target loop rate)</li>
+          <li>Sends velocity setpoints to ODrive S1 over CAN</li>
+          <li>Forwards telemetry back to Cogitator</li>
+        </ul>
       </div>
-    </section>
-
-    <!-- Instinctus -->
-    <section>
-      <h2 class="text-2xl font-bold mb-2 flex items-center gap-3">
-        <span class="text-orange-400">01</span> Instinctus
-      </h2>
-      <p class="text-gray-500 text-sm mb-6">
-        <a href="https://github.com/fungus-wine/calvin_instinctus" target="_blank" rel="noopener"
-           class="text-orange-400 hover:text-orange-300 transition-colors">
-          github.com/fungus-wine/calvin_instinctus
-        </a>
-      </p>
-      <div class="grid md:grid-cols-2 gap-6">
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <h3 class="font-semibold text-orange-300 mb-3">Single-Core Architecture</h3>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            The Teensy 4.1's ARM Cortex-M7 runs at 600 MHz and handles all Instinctus tasks
-            on a single core — sensor reads, serial comms, the PID balance loop, and CAN bus
-            motor commands.
-          </p>
-          <ul class="text-sm text-gray-500 space-y-1.5">
-            <li>Reads ICM-20948 IMU via SPI</li>
-            <li>Reads VL53L4CX ToF sensors on a I2C bus</li>
-            <li>Receives commands from Cogitator over serial</li>
-            <li>Runs PID controller (1 kHz target loop rate)</li>
-            <li>Sends velocity setpoints to ODrive S1 over CAN</li>
-            <li>Forwards telemetry back to Cogitator</li>
-          </ul>
-        </div>
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <h3 class="font-semibold text-orange-300 mb-3">Key Details</h3>
-          <table class="w-full text-sm">
-            <tbody class="divide-y divide-gray-800">
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">Board</td>
-                <td class="py-2 text-gray-300">Teensy 4.1</td>
-              </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">Core</td>
-                <td class="py-2 text-gray-300">ARM Cortex-M7 · 600 MHz</td>
-              </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">Framework</td>
-                <td class="py-2 text-gray-300">Arduino / Teensyduino</td>
-              </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">CAN</td>
-                <td class="py-2 text-gray-300">FlexCAN · 250 kbps</td>
-              </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">Loop rate</td>
-                <td class="py-2 text-gray-300">1 kHz target</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- Cogitator -->
-    <section>
-      <h2 class="text-2xl font-bold mb-2 flex items-center gap-3">
-        <span class="text-orange-400">03</span> Cogitator
-      </h2>
-      <p class="text-gray-500 text-sm mb-6">
-        <a href="https://github.com/fungus-wine/calvin_cogitator" target="_blank" rel="noopener"
-           class="text-orange-400 hover:text-orange-300 transition-colors">
-          github.com/fungus-wine/calvin_cogitator
-        </a>
-      </p>
-      <div class="grid md:grid-cols-2 gap-6">
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <h3 class="font-semibold text-orange-300 mb-3">Planned Python Services</h3>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            Cogitator is architected as a set of independent Python services coordinated by
-            a ZeroMQ message bus and broker.
-          </p>
-          <ul class="text-sm space-y-2.5">
-            <li>
-              <div class="text-gray-300 font-medium">serial_service</div>
-              <div class="text-gray-500 text-xs mt-0.5">Serial link to Instinctus — reads telemetry, writes commands</div>
-            </li>
-            <li class="pt-2 border-t border-gray-800">
-              <div class="text-gray-300 font-medium">vision_service</div>
-              <div class="text-gray-500 text-xs mt-0.5">OAK-D Pro W depth perception, object detection via DepthAI</div>
-            </li>
-            <li class="pt-2 border-t border-gray-800">
-              <div class="text-gray-300 font-medium">video_service</div>
-              <div class="text-gray-500 text-xs mt-0.5">Streaming video from OAK-D Pro W</div>
-            </li>
-            <li class="pt-2 border-t border-gray-800">
-              <div class="text-gray-300 font-medium">hearing_service</div>
-              <div class="text-gray-500 text-xs mt-0.5">Audio location and processing with ReSpeaker 3.0</div>
-            </li>
-            <li class="pt-2 border-t border-gray-800">
-              <div class="text-gray-300 font-medium">audio_service</div>
-              <div class="text-gray-500 text-xs mt-0.5">Audio streaming from ReSpeaker 3.0</div>
-            </li>
-            <li class="pt-2 border-t border-gray-800">
-              <div class="text-gray-300 font-medium">gateway_service</div>
-              <div class="text-gray-500 text-xs mt-0.5">WebSocket server — exposes telemetry and commands to Explorator</div>
-            </li>
-          </ul>
-        </div>
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <h3 class="font-semibold text-orange-300 mb-3">Runtime Environment</h3>
-          <table class="w-full text-sm">
-            <tbody class="divide-y divide-gray-800">
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">Platform</td>
-                <td class="py-2 text-gray-300">Jetson Orin Nano · JetPack 6.2</td>
-              </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">Language</td>
-                <td class="py-2 text-gray-300">Python 3</td>
-              </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">Vision SDK</td>
-                <td class="py-2 text-gray-300">DepthAI / depthai-python</td>
-              </tr>
-              <tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- Explorator -->
-    <section>
-      <h2 class="text-2xl font-bold mb-2 flex items-center gap-3">
-        <span class="text-orange-400">04</span> Explorator
-      </h2>
-      <p class="text-gray-500 text-sm mb-6">
-        <a href="https://github.com/fungus-wine/calvin_explorator" target="_blank" rel="noopener"
-           class="text-orange-400 hover:text-orange-300 transition-colors">
-          github.com/fungus-wine/calvin_explorator
-        </a>
-      </p>
-      <div class="grid md:grid-cols-2 gap-6">
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <h3 class="font-semibold text-orange-300 mb-3">Electron + Vue 3</h3>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            Explorator is a cross-platform desktop application built with Electron and Vue 3.
-            It connects to Cogitator's WebSocket API over LAN to provide live telemetry and
-            manual control.
-          </p>
-          <ul class="text-sm text-gray-500 space-y-1.5">
-            <li>Real-time telemetry dashboard</li>
-            <li>Live camera and audio feeds from Cogitator</li>
-            <li>Manual text commands</li>
-            <li>PID tuning interface</li>
-            <li>Hardware Diagnostics view</li>
-            <li>Data Logger</li>
-          </ul>
-        </div>
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <h3 class="font-semibold text-orange-300 mb-3">Tech Stack</h3>
-          <table class="w-full text-sm">
-            <tbody class="divide-y divide-gray-800">
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">Shell</td>
-                <td class="py-2 text-gray-300">Electron (Node.js)</td>
-              </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">UI Framework</td>
-                <td class="py-2 text-gray-300">Vue 3 + Vite</td>
-              </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">Styling</td>
-                <td class="py-2 text-gray-300">Tailwind CSS</td>
-              </tr>
-              <tr>
-                <td class="py-2 text-gray-500 pr-4">Networking</td>
-                <td class="py-2 text-gray-300">WebSocket client</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- Tooling -->
-    <section>
-      <h2 class="text-2xl font-bold mb-2 flex items-center gap-3">
-        <span class="text-orange-400">05</span> Tooling
-      </h2>
-      <p class="text-gray-400 text-sm max-w-2xl mb-8">
-        Calvin's firmware development relies on two purpose-built tools that replace the standard
-        Arduino IDE workflow with a simple, scriptable CLI wrapper paired with a graphical companion app.
-        Servitor depends on grot — it shells out to <code class="text-gray-300">grot build</code>
-        and <code class="text-gray-300">grot load</code> under the hood.
-      </p>
-      <div class="grid md:grid-cols-2 gap-6">
-
-        <!-- Grot -->
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <div class="flex items-center justify-between mb-1">
-            <h3 class="font-semibold text-orange-300">grot</h3>
-            <span class="text-xs text-gray-500 font-mono bg-gray-800 px-2 py-1 rounded">Ruby gem</span>
-          </div>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            A friendly CLI wrapper around <code class="text-gray-300">arduino-cli</code> and <code class="text-gray-300">teensy_loader_cli</code>.
-            Reads a per-project <code class="text-gray-300">.grotconfig</code> TOML file for board
-            FQBN, port, and sketch path, then exposes memorable sub-commands for the most common
-            development loops. For example:
-          </p>
-          <ul class="text-sm space-y-2.5">
-            <li>
-              <div class="text-gray-300 font-mono">grot build</div>
-              <div class="text-gray-500 text-xs mt-0.5">Compile the sketch via arduino-cli with config-driven settings</div>
-            </li>
-            <li class="pt-2 border-t border-gray-800">
-              <div class="text-gray-300 font-mono">grot load</div>
-              <div class="text-gray-500 text-xs mt-0.5">Upload the compiled binary to the connected board</div>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Servitor -->
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <div class="flex items-center justify-between mb-1">
-            <h3 class="font-semibold text-orange-300">Servitor</h3>
-            <span class="text-xs text-gray-500 font-mono bg-gray-800 px-2 py-1 rounded">Electron / Vue 3</span>
-          </div>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            A cross-platform desktop app that consolidates the Arduino development loop into a
-            single window — project dashboard, serial monitor, and live data plotter — with
-            one-click build and upload backed by grot.
-          </p>
-          <ul class="text-sm text-gray-500 space-y-1.5">
-            <li>Project dashboard — per-project build/load buttons with streaming output</li>
-            <li>Auto port detection — scans ports and updates <code class="text-gray-400">.grotconfig</code> automatically</li>
-            <li>Serial monitor — real-time text view with send capability</li>
-            <li>Serial plotter — live charts from <code class="text-gray-400">key:value</code> data streamed off the board</li>
-            <li>9 OKLCH themes, persistent light/dark mode preference</li>
-          </ul>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- GitHub repos summary -->
-    <section>
-      <h2 class="text-2xl font-bold mb-6">All Repositories</h2>
-      <div class="grid md:grid-cols-2 gap-4">
-        <a href="https://github.com/fungus-wine/calvin_instinctus" target="_blank" rel="noopener"
-           class="bg-gray-900 border border-gray-800 hover:border-orange-600 rounded-xl p-5 transition-colors block">
-          <div class="flex items-center justify-between mb-2">
-            <span class="font-semibold">calvin_instinctus</span>
-            <span class="text-xs text-gray-500 font-mono bg-gray-800 px-2 py-1 rounded">Arduino C++</span>
-          </div>
-          <p class="text-gray-400 text-sm">Teensy 4.1 real-time balance firmware</p>
-          <div class="text-orange-400 text-xs mt-3">github.com/fungus-wine/calvin_instinctus →</div>
-        </a>
-        <a href="https://github.com/fungus-wine/calvin_cogitator" target="_blank" rel="noopener"
-           class="bg-gray-900 border border-gray-800 hover:border-orange-600 rounded-xl p-5 transition-colors block">
-          <div class="flex items-center justify-between mb-2">
-            <span class="font-semibold">calvin_cogitator</span>
-            <span class="text-xs text-gray-500 font-mono bg-gray-800 px-2 py-1 rounded">Python</span>
-          </div>
-          <p class="text-gray-400 text-sm">Jetson Orin Nano AI / vision / serial bridge services</p>
-          <div class="text-orange-400 text-xs mt-3">github.com/fungus-wine/calvin_cogitator →</div>
-        </a>
-        <a href="https://github.com/fungus-wine/calvin_explorator" target="_blank" rel="noopener"
-           class="bg-gray-900 border border-gray-800 hover:border-orange-600 rounded-xl p-5 transition-colors block">
-          <div class="flex items-center justify-between mb-2">
-            <span class="font-semibold">calvin_explorator</span>
-            <span class="text-xs text-gray-500 font-mono bg-gray-800 px-2 py-1 rounded">Electron / Vue</span>
-          </div>
-          <p class="text-gray-400 text-sm">Cross-platform desktop monitoring and control app</p>
-          <div class="text-orange-400 text-xs mt-3">github.com/fungus-wine/calvin_explorator →</div>
-        </a>
-        <a href="https://github.com/fungus-wine/fission" target="_blank" rel="noopener"
-           class="bg-gray-900 border border-gray-800 hover:border-orange-600 rounded-xl p-5 transition-colors block">
-          <div class="flex items-center justify-between mb-2">
-            <span class="font-semibold">fission</span>
-            <span class="text-xs text-gray-500 font-mono bg-gray-800 px-2 py-1 rounded">Ruby</span>
-          </div>
-          <p class="text-gray-400 text-sm">Processor for Autodesk Fusion CAM files and the Makera Carvera</p>
-          <div class="text-orange-400 text-xs mt-3">github.com/fungus-wine/fission →</div>
-        </a>
-        <a href="https://github.com/fungus-wine/grot" target="_blank" rel="noopener"
-           class="bg-gray-900 border border-gray-800 hover:border-orange-600 rounded-xl p-5 transition-colors block">
-          <div class="flex items-center justify-between mb-2">
-            <span class="font-semibold">grot</span>
-            <span class="text-xs text-gray-500 font-mono bg-gray-800 px-2 py-1 rounded">Ruby</span>
-          </div>
-          <p class="text-gray-400 text-sm">arduino-cli wrapper — build, upload, and port management via CLI</p>
-          <div class="text-orange-400 text-xs mt-3">github.com/fungus-wine/grot →</div>
-        </a>
-        <a href="https://github.com/fungus-wine/servitor" target="_blank" rel="noopener"
-           class="bg-gray-900 border border-gray-800 hover:border-orange-600 rounded-xl p-5 transition-colors block">
-          <div class="flex items-center justify-between mb-2">
-            <span class="font-semibold">servitor</span>
-            <span class="text-xs text-gray-500 font-mono bg-gray-800 px-2 py-1 rounded">Electron / Vue</span>
-          </div>
-          <p class="text-gray-400 text-sm">Desktop app — project dashboard, serial monitor, and live data plotter</p>
-          <div class="text-orange-400 text-xs mt-3">github.com/fungus-wine/servitor →</div>
-        </a>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Footer -->
-  <footer class="bg-gray-900 border-t border-gray-800">
-    <div class="max-w-5xl mx-auto px-6 py-12">
-      <h2 class="text-xl font-bold mb-6 text-gray-300">Explore the documentation</h2>
-      <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-        <a href="mechanical.html"
-           class="bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg p-4 transition-colors text-center">
-          <i data-lucide="wrench" class="w-6 h-6 mx-auto mb-2 text-orange-400"></i>
-          <div class="font-semibold text-sm">Mechanical</div>
-          <div class="text-xs text-gray-500 mt-1">Frame &amp; chassis</div>
-        </a>
-        <a href="hardware.html"
-           class="bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg p-4 transition-colors text-center">
-          <i data-lucide="cpu" class="w-6 h-6 mx-auto mb-2 text-orange-400"></i>
-          <div class="font-semibold text-sm">Hardware</div>
-          <div class="text-xs text-gray-500 mt-1">Specs &amp; components</div>
-        </a>
-        <a href="software.html"
-           class="bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg p-4 transition-colors text-center">
-          <i data-lucide="code-2" class="w-6 h-6 mx-auto mb-2 text-orange-400"></i>
-          <div class="font-semibold text-sm">Software</div>
-          <div class="text-xs text-gray-500 mt-1">Architecture &amp; code</div>
-        </a>
-        <a href="gallery.html"
-           class="bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg p-4 transition-colors text-center">
-          <i data-lucide="camera" class="w-6 h-6 mx-auto mb-2 text-orange-400"></i>
-          <div class="font-semibold text-sm">Gallery</div>
-          <div class="text-xs text-gray-500 mt-1">Photos &amp; videos</div>
-        </a>
-        <a href="build-log.html"
-           class="bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg p-4 transition-colors text-center">
-          <i data-lucide="scroll-text" class="w-6 h-6 mx-auto mb-2 text-orange-400"></i>
-          <div class="font-semibold text-sm">Build Log</div>
-          <div class="text-xs text-gray-500 mt-1">Progress updates</div>
-        </a>
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <h3 class="font-semibold text-orange-300 mb-3">Key Details</h3>
+        <table class="w-full text-sm">
+          <tbody class="divide-y divide-gray-800">
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">Board</td>
+              <td class="py-2 text-gray-300">Teensy 4.1</td>
+            </tr>
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">Core</td>
+              <td class="py-2 text-gray-300">ARM Cortex-M7 · 600 MHz</td>
+            </tr>
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">Framework</td>
+              <td class="py-2 text-gray-300">Arduino / Teensyduino</td>
+            </tr>
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">CAN</td>
+              <td class="py-2 text-gray-300">FlexCAN · 250 kbps</td>
+            </tr>
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">Loop rate</td>
+              <td class="py-2 text-gray-300">1 kHz target</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-    <div class="border-t border-gray-800 py-6 text-center text-gray-600 text-sm">
-      <div class="max-w-5xl mx-auto px-6">
-        Calvin Robot Project &nbsp;·&nbsp;
-        <a href="https://github.com/fungus-wine" target="_blank" rel="noopener"
-           class="hover:text-gray-400 transition-colors">GitHub</a>
+  </section>
+
+  <!-- Cogitator -->
+  <section>
+    <h2 class="text-2xl font-bold mb-2 flex items-center gap-3">
+      <span class="text-orange-400">03</span> Cogitator
+    </h2>
+    <p class="text-gray-500 text-sm mb-6">
+      <a href="https://github.com/fungus-wine/calvin_cogitator" target="_blank" rel="noopener"
+         class="text-orange-400 hover:text-orange-300 transition-colors">
+        github.com/fungus-wine/calvin_cogitator
+      </a>
+    </p>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <h3 class="font-semibold text-orange-300 mb-3">Planned Python Services</h3>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+          Cogitator is architected as a set of independent Python services coordinated by
+          a ZeroMQ message bus and broker.
+        </p>
+        <ul class="text-sm space-y-2.5">
+          <li>
+            <div class="text-gray-300 font-medium">serial_service</div>
+            <div class="text-gray-500 text-xs mt-0.5">Serial link to Instinctus — reads telemetry, writes commands</div>
+          </li>
+          <li class="pt-2 border-t border-gray-800">
+            <div class="text-gray-300 font-medium">vision_service</div>
+            <div class="text-gray-500 text-xs mt-0.5">OAK-D Pro W depth perception, object detection via DepthAI</div>
+          </li>
+          <li class="pt-2 border-t border-gray-800">
+            <div class="text-gray-300 font-medium">video_service</div>
+            <div class="text-gray-500 text-xs mt-0.5">Streaming video from OAK-D Pro W</div>
+          </li>
+          <li class="pt-2 border-t border-gray-800">
+            <div class="text-gray-300 font-medium">hearing_service</div>
+            <div class="text-gray-500 text-xs mt-0.5">Audio location and processing with ReSpeaker 3.0</div>
+          </li>
+          <li class="pt-2 border-t border-gray-800">
+            <div class="text-gray-300 font-medium">audio_service</div>
+            <div class="text-gray-500 text-xs mt-0.5">Audio streaming from ReSpeaker 3.0</div>
+          </li>
+          <li class="pt-2 border-t border-gray-800">
+            <div class="text-gray-300 font-medium">gateway_service</div>
+            <div class="text-gray-500 text-xs mt-0.5">WebSocket server — exposes telemetry and commands to Explorator</div>
+          </li>
+        </ul>
+      </div>
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <h3 class="font-semibold text-orange-300 mb-3">Runtime Environment</h3>
+        <table class="w-full text-sm">
+          <tbody class="divide-y divide-gray-800">
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">Platform</td>
+              <td class="py-2 text-gray-300">Jetson Orin Nano · JetPack 6.2</td>
+            </tr>
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">Language</td>
+              <td class="py-2 text-gray-300">Python 3</td>
+            </tr>
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">Vision SDK</td>
+              <td class="py-2 text-gray-300">DepthAI / depthai-python</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-  </footer>
+  </section>
 
-  <script>lucide.createIcons();</script>
-</body>
-</html>
+  <!-- Explorator -->
+  <section>
+    <h2 class="text-2xl font-bold mb-2 flex items-center gap-3">
+      <span class="text-orange-400">04</span> Explorator
+    </h2>
+    <p class="text-gray-500 text-sm mb-6">
+      <a href="https://github.com/fungus-wine/calvin_explorator" target="_blank" rel="noopener"
+         class="text-orange-400 hover:text-orange-300 transition-colors">
+        github.com/fungus-wine/calvin_explorator
+      </a>
+    </p>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <h3 class="font-semibold text-orange-300 mb-3">Electron + Vue 3</h3>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+          Explorator is a cross-platform desktop application built with Electron and Vue 3.
+          It connects to Cogitator's WebSocket API over LAN to provide live telemetry and
+          manual control.
+        </p>
+        <ul class="text-sm text-gray-500 space-y-1.5">
+          <li>Real-time telemetry dashboard</li>
+          <li>Live camera and audio feeds from Cogitator</li>
+          <li>Manual text commands</li>
+          <li>PID tuning interface</li>
+          <li>Hardware Diagnostics view</li>
+          <li>Data Logger</li>
+        </ul>
+      </div>
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <h3 class="font-semibold text-orange-300 mb-3">Tech Stack</h3>
+        <table class="w-full text-sm">
+          <tbody class="divide-y divide-gray-800">
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">Shell</td>
+              <td class="py-2 text-gray-300">Electron (Node.js)</td>
+            </tr>
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">UI Framework</td>
+              <td class="py-2 text-gray-300">Vue 3 + Vite</td>
+            </tr>
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">Styling</td>
+              <td class="py-2 text-gray-300">Tailwind CSS</td>
+            </tr>
+            <tr>
+              <td class="py-2 text-gray-500 pr-4">Networking</td>
+              <td class="py-2 text-gray-300">WebSocket client</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tooling -->
+  <section>
+    <h2 class="text-2xl font-bold mb-2 flex items-center gap-3">
+      <span class="text-orange-400">05</span> Tooling
+    </h2>
+    <p class="text-gray-400 text-sm max-w-2xl mb-8">
+      Calvin's firmware development relies on two purpose-built tools that replace the standard
+      Arduino IDE workflow with a simple, scriptable CLI wrapper paired with a graphical companion app.
+      Servitor depends on grot — it shells out to <code class="text-gray-300">grot build</code>
+      and <code class="text-gray-300">grot load</code> under the hood.
+    </p>
+    <div class="grid md:grid-cols-2 gap-6">
+
+      <!-- Grot -->
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <div class="flex items-center justify-between mb-1">
+          <h3 class="font-semibold text-orange-300">grot</h3>
+          <span class="text-xs text-gray-500 font-mono bg-gray-800 px-2 py-1 rounded">Ruby gem</span>
+        </div>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+          A friendly CLI wrapper around <code class="text-gray-300">arduino-cli</code> and <code class="text-gray-300">teensy_loader_cli</code>.
+          Reads a per-project <code class="text-gray-300">.grotconfig</code> TOML file for board
+          FQBN, port, and sketch path, then exposes memorable sub-commands for the most common
+          development loops. For example:
+        </p>
+        <ul class="text-sm space-y-2.5">
+          <li>
+            <div class="text-gray-300 font-mono">grot build</div>
+            <div class="text-gray-500 text-xs mt-0.5">Compile the sketch via arduino-cli with config-driven settings</div>
+          </li>
+          <li class="pt-2 border-t border-gray-800">
+            <div class="text-gray-300 font-mono">grot load</div>
+            <div class="text-gray-500 text-xs mt-0.5">Upload the compiled binary to the connected board</div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Servitor -->
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <div class="flex items-center justify-between mb-1">
+          <h3 class="font-semibold text-orange-300">Servitor</h3>
+          <span class="text-xs text-gray-500 font-mono bg-gray-800 px-2 py-1 rounded">Electron / Vue 3</span>
+        </div>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+          A cross-platform desktop app that consolidates the Arduino development loop into a
+          single window — project dashboard, serial monitor, and live data plotter — with
+          one-click build and upload backed by grot.
+        </p>
+        <ul class="text-sm text-gray-500 space-y-1.5">
+          <li>Project dashboard — per-project build/load buttons with streaming output</li>
+          <li>Auto port detection — scans ports and updates <code class="text-gray-400">.grotconfig</code> automatically</li>
+          <li>Serial monitor — real-time text view with send capability</li>
+          <li>Serial plotter — live charts from <code class="text-gray-400">key:value</code> data streamed off the board</li>
+          <li>9 OKLCH themes, persistent light/dark mode preference</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GitHub repos summary -->
+  <section>
+    <h2 class="text-2xl font-bold mb-6">All Repositories</h2>
+    <div class="grid md:grid-cols-2 gap-4">
+      <a href="https://github.com/fungus-wine/calvin_instinctus" target="_blank" rel="noopener"
+         class="bg-gray-900 border border-gray-800 hover:border-orange-600 rounded-xl p-5 transition-colors block">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-semibold">calvin_instinctus</span>
+          <span class="text-xs text-gray-500 font-mono bg-gray-800 px-2 py-1 rounded">Arduino C++</span>
+        </div>
+        <p class="text-gray-400 text-sm">Teensy 4.1 real-time balance firmware</p>
+        <div class="text-orange-400 text-xs mt-3">github.com/fungus-wine/calvin_instinctus →</div>
+      </a>
+      <a href="https://github.com/fungus-wine/calvin_cogitator" target="_blank" rel="noopener"
+         class="bg-gray-900 border border-gray-800 hover:border-orange-600 rounded-xl p-5 transition-colors block">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-semibold">calvin_cogitator</span>
+          <span class="text-xs text-gray-500 font-mono bg-gray-800 px-2 py-1 rounded">Python</span>
+        </div>
+        <p class="text-gray-400 text-sm">Jetson Orin Nano AI / vision / serial bridge services</p>
+        <div class="text-orange-400 text-xs mt-3">github.com/fungus-wine/calvin_cogitator →</div>
+      </a>
+      <a href="https://github.com/fungus-wine/calvin_explorator" target="_blank" rel="noopener"
+         class="bg-gray-900 border border-gray-800 hover:border-orange-600 rounded-xl p-5 transition-colors block">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-semibold">calvin_explorator</span>
+          <span class="text-xs text-gray-500 font-mono bg-gray-800 px-2 py-1 rounded">Electron / Vue</span>
+        </div>
+        <p class="text-gray-400 text-sm">Cross-platform desktop monitoring and control app</p>
+        <div class="text-orange-400 text-xs mt-3">github.com/fungus-wine/calvin_explorator →</div>
+      </a>
+      <a href="https://github.com/fungus-wine/fission" target="_blank" rel="noopener"
+         class="bg-gray-900 border border-gray-800 hover:border-orange-600 rounded-xl p-5 transition-colors block">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-semibold">fission</span>
+          <span class="text-xs text-gray-500 font-mono bg-gray-800 px-2 py-1 rounded">Ruby</span>
+        </div>
+        <p class="text-gray-400 text-sm">Processor for Autodesk Fusion CAM files and the Makera Carvera</p>
+        <div class="text-orange-400 text-xs mt-3">github.com/fungus-wine/fission →</div>
+      </a>
+      <a href="https://github.com/fungus-wine/grot" target="_blank" rel="noopener"
+         class="bg-gray-900 border border-gray-800 hover:border-orange-600 rounded-xl p-5 transition-colors block">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-semibold">grot</span>
+          <span class="text-xs text-gray-500 font-mono bg-gray-800 px-2 py-1 rounded">Ruby</span>
+        </div>
+        <p class="text-gray-400 text-sm">arduino-cli wrapper — build, upload, and port management via CLI</p>
+        <div class="text-orange-400 text-xs mt-3">github.com/fungus-wine/grot →</div>
+      </a>
+      <a href="https://github.com/fungus-wine/servitor" target="_blank" rel="noopener"
+         class="bg-gray-900 border border-gray-800 hover:border-orange-600 rounded-xl p-5 transition-colors block">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-semibold">servitor</span>
+          <span class="text-xs text-gray-500 font-mono bg-gray-800 px-2 py-1 rounded">Electron / Vue</span>
+        </div>
+        <p class="text-gray-400 text-sm">Desktop app — project dashboard, serial monitor, and live data plotter</p>
+        <div class="text-orange-400 text-xs mt-3">github.com/fungus-wine/servitor →</div>
+      </a>
+    </div>
+  </section>
+
+</main>

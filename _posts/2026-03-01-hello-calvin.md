@@ -1,5 +1,5 @@
 ---
-date: 2026-03-01T12:07
+date: 2026-03-01 12:07:00 -0500
 tag: Welcome
 title: Hello, Calvin
 ---
@@ -9,4 +9,3 @@ Welcome to the Calvin project. Calvin is an autonomous, two-wheeled, self-balanc
 I’ve completed a fair amount of the design, but there is still more unfinished than finished.
 
 So far, I have a solid start on the mechanical design, the electrical components have been selected, and I’ve begun working on the backbone code—the communication architecture that allows the components to talk to one another.
-

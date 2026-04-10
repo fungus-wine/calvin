@@ -1,5 +1,5 @@
 ---
-date: 2026-03-01T12:28
+date: 2026-03-01 12:28:00 -0500
 tag: Instinctus
 title: The Nervous System
 ---

@@ -6,7 +6,13 @@
       "WebFetch(domain:github.com)",
       "WebFetch(domain:cdn.jsdelivr.net)",
       "WebFetch(domain:dev.to)",
-      "WebFetch(domain:v3.tailwindcss.com)"
+      "WebFetch(domain:v3.tailwindcss.com)",
+      "Bash(ls:*)",
+      "Bash(wc:*)",
+      "Bash(bundle exec:*)",
+      "Bash(npx tailwindcss:*)",
+      "Bash(npm run:*)",
+      "Bash(RBENV_VERSION=3.4.4 bundle exec jekyll build)"
     ]
   }
 }

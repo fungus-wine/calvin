@@ -1,0 +1,11 @@
+# Netlify redirects file.
+# Format: <from>  <to>  <status>
+# Docs: https://docs.netlify.com/routing/redirects/
+#
+# Example — permanent redirect from an old path to a new one:
+# /old-hardware-page   /hardware/   301
+#
+# Example — redirect an external alias to a local page:
+# /gh   https://github.com/fungus-wine   301!
+#
+# The trailing "!" forces the redirect even if a matching file exists.

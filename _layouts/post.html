@@ -1,0 +1,14 @@
+---
+layout: default
+---
+<!-- Page header -->
+<header class="max-w-5xl mx-auto px-6 pt-14 pb-6">
+  <p class="text-orange-400 text-sm font-semibold tracking-widest uppercase mb-2">Progress</p>
+  <a href="{{ '/build-log/' | relative_url }}" class="text-sm text-gray-500 hover:text-orange-400 transition-colors">← Back to Build Log</a>
+</header>
+
+<main class="max-w-3xl mx-auto px-6 pb-20">
+  <div class="relative">
+    {% include build_entry.html post=page %}
+  </div>
+</main>

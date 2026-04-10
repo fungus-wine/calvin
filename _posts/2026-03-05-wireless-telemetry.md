@@ -1,5 +1,5 @@
 ---
-date: 2026-03-05T08:51
+date: 2026-03-05 08:51:00 -0500
 tag: Cogitator, Explorator
 title: Wireless Telemetry
 ---

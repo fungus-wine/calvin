@@ -1,0 +1,41 @@
+title: Calvin Robot
+description: Documentation for the Calvin self-balancing robot project — firmware, edge AI, mechanical build, and progress log.
+baseurl: ""
+url: "https://fungus-wine-calvin.netlify.app"
+lang: en
+author: fungus-wine
+
+markdown: kramdown
+permalink: pretty
+plugins:
+  - jekyll-paginate
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+paginate: 10
+paginate_path: "/build-log/page:num/"
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      permalink: /build-log/:year-:month-:day-:slug/
+
+include:
+  - _redirects
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - CLAUDE.md
+  - README.md
+  - .claudeignore
+  - vendor
+  - .bundle
+  - node_modules
+  - package.json
+  - package-lock.json
+  - tailwind.config.js
+  - tailwind.src.css
