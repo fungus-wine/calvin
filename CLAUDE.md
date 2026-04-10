@@ -5,7 +5,7 @@ Jekyll-based documentation site for the Calvin self-balancing robot. Deployed to
 GitHub Pages / Netlify as static HTML.
 
 ## Tech Stack
-- **Jekyll** (via `github-pages` gem) with `jekyll-paginate`, `jekyll-seo-tag`, `jekyll-sitemap`
+- **Jekyll 4.x** (plain, not via `github-pages` gem) with `jekyll-paginate`, `jekyll-seo-tag`, `jekyll-sitemap`
 - **Tailwind CSS** (v3, standalone CLI) — compiled to `assets/css/tailwind.css` and committed
 - **custom.css** — hand-written overrides in `assets/css/custom.css`
 - **Lucide icons** — loaded via CDN in the footer only
@@ -92,10 +92,12 @@ Permalink is `/build-log/:year-:month-:day-:slug/`.
 In `gallery.html`, replace a `{% include video_placeholder.html %}` call with a
 real `<figure>` containing an `<iframe src="https://www.youtube.com/embed/VIDEO_ID">`.
 
-## GitHub Pages Deployment
-Push `main`. Repo Settings → Pages → source: `main` / root. The `github-pages`
-gem version pins compatible Jekyll + plugins. No CI needed because Tailwind
-output is committed.
+## Deployment
+Site is deployed to Cloudflare Workers Static Assets. Config lives in
+`wrangler.jsonc` (pointing `assets.directory` at `./_site/`). Every push to
+`main` triggers a Cloudflare build: `bundle exec jekyll build` → `npx wrangler deploy`.
+Required env vars in the Cloudflare dashboard: `JEKYLL_ENV=production`,
+`RUBY_VERSION=3.4.4`.
 
 ## Things to Watch
 - **Never reintroduce the Tailwind CDN** — it's a dev-only tool and was replaced
