@@ -171,7 +171,7 @@ permalink: /mechanical/
     <div class="mt-6 bg-gray-900/40 border border-gray-800 rounded-xl p-6">
       <h3 class="font-semibold text-orange-300 mb-3">Drive System Design Note</h3>
       <p class="text-gray-400 text-sm leading-relaxed max-w-3xl">
-        The ODrive S1s are overkill. Preliminary calculations predicted a motor current of about 4-5 amps, which is just outside the smaller ODrive Micro's capability, so I went with the more robust S1 drivers to be safe.
+        The ODrive S1s are probably overkill. Preliminary calculations predicted a motor current of about 4-5 amps, which is just outside the smaller ODrive Micro's capability, so I went with the more robust S1 drivers to be safe.
       </p>
     </div>
   </section>
@@ -186,7 +186,7 @@ permalink: /mechanical/
       <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
         <h3 class="font-semibold text-orange-300 mb-3">Battery</h3>
         <p class="text-gray-400 text-sm leading-relaxed mb-4">
-          Calvin runs on a 3S 11.1V LiPo RC battery pack.
+          Calvin runs on a 4S 14.8V LiPo RC battery pack.
         </p>
         <table class="w-full text-sm">
           <tbody class="divide-y divide-gray-800">
@@ -196,11 +196,11 @@ permalink: /mechanical/
             </tr>
             <tr>
               <td class="py-2 text-gray-500 pr-4">Nominal voltage</td>
-              <td class="py-2 text-gray-300">3S · 11.1 V</td>
+              <td class="py-2 text-gray-300">3S · 14.8 V</td>
             </tr>
             <tr>
               <td class="py-2 text-gray-500 pr-4">Capacity</td>
-              <td class="py-2 text-gray-300">58.83 Wh (5.3 Ahr)</td>
+              <td class="py-2 text-gray-300">106.56 Wh (7.2 Ahr)</td>
             </tr>
 
           </tbody>
@@ -210,9 +210,7 @@ permalink: /mechanical/
       <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
         <h3 class="font-semibold text-orange-300 mb-3">Power Distribution</h3>
         <p class="text-gray-400 text-sm leading-relaxed mb-4">
-          The battery feeds the ODrive S1 controllers directly at pack voltage. Lower-voltage
-          rails for the Teensy 4.1 and Jetson Orin Nano are derived via dedicated BEC /
-          DC-DC converters to isolate logic power from the noisy motor supply.
+          The battery feeds the ODrive S1 controllers and Jetson directly at pack voltage. A buck converter will provide power to the 3.3/5 V boards.
         </p>
         <ul class="text-sm text-gray-500 space-y-2">
           <li class="flex gap-3">
@@ -222,10 +220,6 @@ permalink: /mechanical/
           <li class="flex gap-3 pt-2 border-t border-gray-800">
             <span class="text-orange-400 font-mono text-xs w-16 shrink-0 pt-0.5">5 V logic</span>
             <span>Buck converter step-down for Teensy 4.1 and peripheral sensors</span>
-          </li>
-          <li class="flex gap-3 pt-2 border-t border-gray-800">
-            <span class="text-orange-400 font-mono text-xs w-16 shrink-0 pt-0.5">Jetson</span>
-            <span>Buck converter step-down for Jetson and peripheral devices</span>
           </li>
         </ul>
       </div>

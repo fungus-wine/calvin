@@ -12,7 +12,9 @@
       "Bash(bundle exec:*)",
       "Bash(npx tailwindcss:*)",
       "Bash(npm run:*)",
-      "Bash(RBENV_VERSION=3.4.4 bundle exec jekyll build)"
+      "Bash(RBENV_VERSION=3.4.4 bundle exec jekyll build)",
+      "WebFetch(domain:developers.cloudflare.com)",
+      "WebFetch(domain:gist.github.com)"
     ]
   }
 }
